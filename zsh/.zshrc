@@ -7,6 +7,10 @@
 # Zsh configuration
 # -----------------
 
+# If we're on wsl2 and we've used the systemd hack, start it up.
+if [ "$IS_WSL" = "wsl" ]; then
+  source /usr/sbin/start-systemd-namespace
+fi
 #
 # History
 #
@@ -19,7 +23,7 @@ setopt HIST_IGNORE_ALL_DUPS
 #
 
 # Set editor default keymap to emacs (`-e`) or vi (`-v`)
-bindkey -v
+bindkey -e  # too much muscle memory for -v 
 
 # Prompt for spelling correction of commands.
 #setopt CORRECT
@@ -121,6 +125,3 @@ bindkey '^N' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 # }}} End configuration added by Zim install
-
-# Created by newuser for 5.8
-alias dotfiles='/usr/bin/git --git-dir=/home/sacsar/.dotfiles/ --work-tree=/home/sacsar'
