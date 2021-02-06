@@ -1,19 +1,20 @@
-source zsh-snap/znap.zsh
-#Start configuration added by Zim install {{{
-#
-# User configuration sourced by interactive shells
-#
+zstyle ':znap:*' plugins-dir $XDG_DATA_HOME/zsh
+source $ZNAP_HOME/znap.zsh
 
-# -----------------
-# Zsh configuration
-# -----------------
+# znap will handle compinit for us
+
+# User configuration sourced by interactive shells
+
+
+path+=("$HOME/.local/bin")
 
 # If we're on wsl2 and we've used the systemd hack, start it up.
 if [ "$IS_WSL" = "wsl" ]; then
   source /usr/sbin/start-systemd-namespace
 fi
 
-znap propmt agnoster/agnoster-zsh-theme
+znap prompt agnoster/agnoster-zsh-theme
+
 #
 # History
 #
@@ -71,4 +72,12 @@ bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
-# }}} End configuration added by Zim install
+
+# Aliases
+
+alias sc=source $HOME/.zshrc
+
+# only alias nvim if we had to go the appimage route
+if [ -f $LOCAL_BIN/nvim.appimage ]; then
+    alias nvim=$LOCAL_BIN/nvim.appimage
+fi
