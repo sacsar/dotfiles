@@ -9,3 +9,4 @@ mkdir -p $XDG_DATA_HOME/zsh
 mkdir -p $XDG_CONFIG_HOME
 mkdir -p $XDG_CACHE_HOME
 mkdir -p $LOCAL_BIN
+mkdir -p $LOCAL_BIN/zsh

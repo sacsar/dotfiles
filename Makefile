@@ -7,21 +7,24 @@ setup:
 	scripts/common.sh
 
 mac: | mac_deps stow setup
+	curl https://raw.githubusercontent.com/arcticicestudio/nord-iterm2/develop/src/xml/Nord.itermcolors -o $(HOME)/Nord.itermcolors
 
-rhel: | rhel_deps rhel_nvim rhel_fzf stow
+rhel: | setup rhel_deps rhel_nvim rhel_fzf stow linux_rg
 
-ubuntu: | ubuntu_deps stow nvim_app_image
+ubuntu: | setup ubuntu_deps stow nvim_app_image
+
+common_packages = stow pandoc jq
 
 # Cover things that can be installed by package manager
 mac_deps_INSTALL = brew install
-mac_deps_PACKAGES = stow pandoc neovim tree ripgrep
+mac_deps_PACKAGES = $(common_packages) neovim tree ripgrep coreutils fzf tmux
 # omit wget for now should be there by default, I think
 
 rhel_deps_INSTALL = sudo yum install -y
-rhel_deps_PACKAGES = stow pandoc the_silver_searcher tree
+rhel_deps_PACKAGES = $(common_packages) tree
 
 ubuntu_deps_INSTALL = sudo apt-get install -y
-ubuntu_deps_PACKAGES = stow pandoc ripgrep fzf
+ubuntu_deps_PACKAGES = $(common_packages) ripgrep fzf
 
 mac_deps rhel_deps ubuntu_deps:
 	$($@_INSTALL) $($@_PACKAGES)
@@ -39,3 +42,9 @@ stow:
 
 nvim_app_image:
 	scripts/neovim.sh
+
+dircolors:
+	curl https://raw.githubusercontent.com/arcticicestudio/nord-dircolors/develop/src/dir_colors -o $(HOME)/.dircolors
+
+linux_rg: setup
+	scripts/linux_ripgrep.sh

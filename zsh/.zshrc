@@ -6,6 +6,7 @@ source $ZNAP_HOME/znap.zsh
 # User configuration sourced by interactive shells
 
 path+=("$HOME/.local/bin")
+fpath+=("$HOME/.local/bin/zsh")
 
 # If we're on wsl2 and we've used the systemd hack, start it up.
 if [ "$IS_WSL" = "wsl" ]; then
@@ -23,11 +24,19 @@ znap source wfxr/forgit
 # See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
-#
+# dircolors/appearance 
+if [ -f $HOME/.dircolors ]; then
+    case $OSTYPE in
+        *"darwin"*) eval $(gdircolors $HOME/.dircolors)
+            export CLICOLORS=1;;
+        *) eval $(dircolors $HOME/.dircolors);
+    esac
+
+fi
+
 # History
 #
 
-# take the one from omz as it seems to be more robust
 znap source zsh-users/zsh-history-substring-search
 
 # Remove older command from the history if a duplicate is to be added.
@@ -38,7 +47,6 @@ function sc() {
     echo "Reloading zshrc"
     source $HOME/.zshrc
 }
-
 
 # only alias nvim if we had to go the appimage route
 if [ -f $LOCAL_BIN/nvim.appimage ]; then
@@ -51,6 +59,11 @@ fi
 
 # Set editor default keymap to emacs (`-e`) or vi (`-v`)
 bindkey -e  # too much muscle memory for -v 
+
+###### LOCAL CONFIG
+if [ -f "$ZDOTDIR/.zshrc.local" ]; then
+    source $ZDOTDIR/.zshrc.local
+fi
 
 # ------------------------------
 # Post-init module configuration
