@@ -1,5 +1,4 @@
 # User configuration sourced by all invocations of the shell
-# Define Zim location
 : ${ZNAP_HOME=${ZDOTDIR:-${HOME}/dotfiles/zsh}/.zsh-snap}
 
 is_wsl() {

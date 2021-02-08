@@ -17,7 +17,7 @@ znap prompt agnoster/agnoster-zsh-theme
 # Plugins
 znap source diazod/git-prune
 znap source Tarrasch/zsh-bd
-
+znap source wfxr/forgit
 
 # Set what highlighters will be used.
 # See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
