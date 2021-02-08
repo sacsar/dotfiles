@@ -6,7 +6,7 @@ default:
 setup:
 	scripts/common.sh
 
-mac: | mac_deps stow
+mac: | mac_deps stow setup
 
 rhel: | rhel_deps rhel_nvim rhel_fzf stow
 
@@ -14,7 +14,8 @@ ubuntu: | ubuntu_deps stow nvim_app_image
 
 # Cover things that can be installed by package manager
 mac_deps_INSTALL = brew install
-mac_deps_PACKAGES = stow pandoc neovim tree wget ripgrep fzf
+mac_deps_PACKAGES = stow pandoc neovim tree ripgrep
+# omit wget for now should be there by default, I think
 
 rhel_deps_INSTALL = sudo yum install -y
 rhel_deps_PACKAGES = stow pandoc the_silver_searcher tree
