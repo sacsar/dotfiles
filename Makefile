@@ -13,6 +13,8 @@ rhel: | setup rhel_deps rhel_nvim rhel_fzf stow linux_rg
 
 ubuntu: | setup ubuntu_deps stow nvim_app_image
 
+manjaro: | setup manjaro_deps stow nvim_app_image
+
 common_packages = stow pandoc jq
 
 # Cover things that can be installed by package manager
@@ -26,7 +28,10 @@ rhel_deps_PACKAGES = $(common_packages) tree
 ubuntu_deps_INSTALL = sudo apt-get install -y
 ubuntu_deps_PACKAGES = $(common_packages) ripgrep fzf
 
-mac_deps rhel_deps ubuntu_deps:
+manjaro_deps_INSTALL = sudo pacman -Sy
+manjaro_deps_PACKAGES = $(common_packages) tree ripgrep fzf
+
+mac_deps rhel_deps ubuntu_deps manjaro_deps:
 	$($@_INSTALL) $($@_PACKAGES)
 
 # putting this separately because I'm not sure it's available
