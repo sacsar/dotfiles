@@ -29,7 +29,7 @@ ubuntu_deps_INSTALL = sudo apt-get install -y
 ubuntu_deps_PACKAGES = $(common_packages) ripgrep fzf
 
 manjaro_deps_INSTALL = sudo pacman -Sy
-manjaro_deps_PACKAGES = $(common_packages) tree ripgrep fzf
+manjaro_deps_PACKAGES = $(common_packages) tree ripgrep fzf xsel
 
 mac_deps rhel_deps ubuntu_deps manjaro_deps:
 	$($@_INSTALL) $($@_PACKAGES)
@@ -43,7 +43,7 @@ rhel_nvim:
 
 # it's a little silly to include i3 and picom in os x
 stow:
-	stow -S -v nvim i3 picom zsh
+	stow -S -v nvim i3 picom zsh latexmk
 
 nvim_app_image:
 	scripts/neovim.sh
