@@ -25,3 +25,14 @@ nnoremap <C-o> :NERDTreeToggle<CR>
 
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.DS_STORE$', '$\.git']
+
+" LaTeX
+Plug 'lervag/vimtex'
+if has('unix') " still not good enough because should be true on os x
+    let g:vimtex_view_method = 'zathura' "NOTE: linux only
+endif
+
+" coc-nvim -- NeoVim only
+if has('nvim')
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+endif
