@@ -85,6 +85,23 @@ function NumberToggle()
 endfunction
 command! NumberToggle call NumberToggle()
 
+""" Strip trailing  whitespace
+" http://vimcasts.org/episodes/tidying-whitespace/
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
+command! TrimWhitespace call <SID>StripTrailingWhitespaces()
+
 command! FullPath echo expand('%:p')
 
 
@@ -96,6 +113,15 @@ let g:indent_guides_guide_size = 1
 
 " Define filetype for polybar config
 autocmd BufRead,BufNewFile ~/.config/polybar/* set syntax=dosini
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 
 
 command! ReloadVimrc source $MYVIMRC
