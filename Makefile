@@ -45,6 +45,9 @@ rhel_nvim:
 stow:
 	stow -S -v nvim i3 picom zsh latexmk
 
+ombash:
+	bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
+
 nvim_app_image:
 	scripts/neovim.sh
 
