@@ -172,3 +172,17 @@ if has('nvim')
     " Resume latest coc list.
     nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 endif
+
+" Golang
+Plug 'fatih/vim-go'
+
+" Markdown
+Plug 'godlygeek/tabular'
+Plug 'preservim/vim-markdown'
+
+" YAML
+Plug 'Yggdroot/indentLine'
+let g:indentLine_char = '⦙'
+
+" Plant uml
+Plug 'aklt/plantuml-syntax'
