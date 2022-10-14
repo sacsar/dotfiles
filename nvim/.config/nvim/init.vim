@@ -123,9 +123,25 @@ else
   set signcolumn=yes
 endif
 
-
 command! ReloadVimrc source $MYVIMRC
 command! EditVimrc :edit $MYVIMRC
+
+if has('nvim')
+    " terminal mode stuff
+    augroup neovim_terminal
+        " get us back into a normal mode where we can change windows
+        :tnoremap <Esc> <C-\><C-n>
+        " see https://stackoverflow.com/a/63909865
+        autocmd!
+        " Enter Terminal-mode (insert) automatically
+        autocmd TermOpen * startinsert
+        " Disables number lines on terminal buffers
+        autocmd TermOpen * :set nonumber norelativenumber
+        " allows you to use Ctrl-c on terminal window
+        autocmd TermOpen * nnoremap <buffer> <C-c> i<C-c>
+    augroup END
+endif
+
 
 " Finally, load secretive stuff not under version control
 if !empty(glob("~/.config/nvim_local.vim"))

@@ -32,6 +32,11 @@ if has('unix') " still not good enough because should be true on os x
     let g:vimtex_view_method = 'zathura' "NOTE: linux only
 endif
 
+" Folding
+Plug 'Konfekt/FastFold'
+let g:python_fold_enabled = 1
+Plug 'tmhedberg/SimpylFold' " python folding
+
 " coc-nvim -- NeoVim only
 if has('nvim')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
