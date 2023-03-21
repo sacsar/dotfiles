@@ -1,4 +1,5 @@
 zstyle ':znap:*' plugins-dir $XDG_DATA_HOME/zsh
+zstyle ':znap:*' auto-compile no
 source $ZNAP_HOME/znap.zsh
 
 # znap will handle compinit for us
@@ -13,7 +14,7 @@ if [ "$IS_WSL" = "wsl" ]; then
   source /usr/sbin/start-systemd-namespace
 fi
 
-znap prompt agnoster/agnoster-zsh-theme
+# znap prompt agnoster/agnoster-zsh-theme
 
 # Plugins
 znap source diazod/git-prune
@@ -41,6 +42,12 @@ znap source zsh-users/zsh-history-substring-search
 
 # Remove older command from the history if a duplicate is to be added.
 setopt HIST_IGNORE_ALL_DUPS
+
+function set_win_title(){
+    echo -ne "\033]0; $(basename "$PWD") \007"
+}
+precmd_functions+=(set_win_title)
+starship_precmd_user_func="set_win_title"
 
 # Aliases
 function sc() {
@@ -89,3 +96,28 @@ bindkey '^N' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/var/lib/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/var/lib/conda/etc/profile.d/conda.sh" ]; then
+        . "/var/lib/conda/etc/profile.d/conda.sh"
+    else
+        export PATH="/var/lib/conda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+conda deactivate
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+eval "$(direnv hook zsh)"
+
+eval "$(starship init zsh)"

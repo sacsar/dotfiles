@@ -179,7 +179,8 @@ if has('nvim')
 endif
 
 " Golang
-Plug 'fatih/vim-go'
+" use coc-go for now
+" Plug 'fatih/vim-go'
 
 " Markdown
 Plug 'godlygeek/tabular'
@@ -191,3 +192,14 @@ let g:indentLine_char = '⦙'
 
 " Plant uml
 Plug 'aklt/plantuml-syntax'
+
+" vim-wiki
+Plug 'vimwiki/vimwiki'
+
+"terraform
+Plug 'hashivim/vim-terraform'
+let g:terraform_format_on_save=1
+let g:terrafrom_align=1
+
+" helm
+Plug 'towolf/vim-helm'
