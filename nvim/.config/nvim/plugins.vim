@@ -2,8 +2,16 @@
 Plug 'itchyny/lightline.vim'
 Plug 'arcticicestudio/nord-vim'
 
+" See https://github.com/itchyny/lightline.vim#advanced-configuration
 let g:lightline = {
             \ 'colorscheme': 'nord',
+            \ 'active': {
+            \    'left': [[ 'mode', 'paste'],
+            \            [ 'gitbranch', 'readonly', 'filename', 'modified' ]]
+            \ },
+            \ 'component_function': {
+            \   'gitbranch': 'FugitiveHead'
+            \ },
             \}
 
 Plug 'luochen1990/rainbow'
