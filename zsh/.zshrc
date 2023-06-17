@@ -97,6 +97,7 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
 
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/var/lib/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -112,7 +113,9 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+if which conda > /dev/null; then
 conda deactivate
+fi
 
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"

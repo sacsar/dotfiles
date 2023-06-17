@@ -13,9 +13,9 @@ rhel: | setup rhel_deps rhel_nvim rhel_fzf stow linux_rg
 
 ubuntu: | setup ubuntu_deps stow nvim_app_image
 
-manjaro: | setup manjaro_deps stow nvim_app_image
+manjaro: | setup manjaro_deps stow
 
-common_packages = stow pandoc jq
+common_packages = stow pandoc jq starship
 
 # Cover things that can be installed by package manager
 mac_deps_INSTALL = brew install
@@ -29,7 +29,7 @@ ubuntu_deps_INSTALL = sudo apt-get install -y
 ubuntu_deps_PACKAGES = $(common_packages) ripgrep fzf
 
 manjaro_deps_INSTALL = sudo pacman -Sy
-manjaro_deps_PACKAGES = $(common_packages) tree ripgrep fzf xsel
+manjaro_deps_PACKAGES = $(common_packages) tree ripgrep fzf xsel neovim
 
 mac_deps rhel_deps ubuntu_deps manjaro_deps:
 	$($@_INSTALL) $($@_PACKAGES)
