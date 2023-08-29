@@ -202,12 +202,15 @@ let g:indentLine_char = '⦙'
 Plug 'aklt/plantuml-syntax'
 
 " vim-wiki
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 
 "terraform
 Plug 'hashivim/vim-terraform'
 let g:terraform_format_on_save=1
-let g:terrafrom_align=1
+let g:terrafrom_align=1 " requires tabularize, but we have it
 
 " helm
 Plug 'towolf/vim-helm'
+
+" scratch
+Plug 'mtth/scratch.vim'
