@@ -20,6 +20,7 @@ fi
 znap source diazod/git-prune
 znap source Tarrasch/zsh-bd
 znap source wfxr/forgit
+znap source ohmyzsh/ohmyzsh plugins/urltools
 
 # Set what highlighters will be used.
 # See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
@@ -50,6 +51,7 @@ precmd_functions+=(set_win_title)
 starship_precmd_user_func="set_win_title"
 
 # Aliases
+alias tf=terraform
 function sc() {
     echo "Reloading zshrc"
     source $HOME/.zshrc
@@ -69,7 +71,10 @@ bindkey -e  # too much muscle memory for -v
 
 ###### LOCAL CONFIG
 if [ -f "$ZDOTDIR/.zshrc.local" ]; then
-    source $ZDOTDIR/.zshrc.local
+    source "$ZDOTDIR/.zshrc.local"
+else if [ -f "$HOME/.zshrc.local" ]; then
+    source "$HOME/.zshrc.local"
+fi
 fi
 
 # ------------------------------
