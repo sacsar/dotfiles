@@ -1,5 +1,7 @@
 SHELL := /bin/bash
 
+XDG_DATA_HOME ?= $(HOME)/.local/share
+
 default:
 	@echo "Run one of the following: mac, rhel, ubuntu, opensuse"
 
@@ -61,3 +63,11 @@ dircolors:
 
 linux_rg: setup
 	scripts/linux_ripgrep.sh
+
+$(XDG_DATA_HOME)/konsole:
+	@mkdir -p $(XDG_DATA_HOME)/konsole
+
+$(XDG_DATA_HOME)/konsole/nord.colorscheme: $(XDG_DATA_HOME)/konsole
+	@curl https://raw.githubusercontent.com/nordtheme/konsole/develop/src/nord.colorscheme -o $(XDG_DATA_HOME)/konsole/nord.colorscheme
+
+nord: | $(XDG_DATA_HOME)/konsole/nord.colorscheme dircolors
