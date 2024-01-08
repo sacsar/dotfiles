@@ -3,7 +3,7 @@ zstyle ':znap:*' auto-compile no
 source $ZNAP_HOME/znap.zsh
 
 # znap will handle compinit for us
-
+ZDOTDIR=${ZDOTDIR:-"$HOME"}
 # User configuration sourced by interactive shells
 
 path+=("$HOME/.local/bin")

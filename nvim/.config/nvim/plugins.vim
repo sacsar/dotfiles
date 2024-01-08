@@ -184,6 +184,9 @@ if has('nvim')
     nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
     " Resume latest coc list.
     nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+    " install some coc plugins via plug
+    Plug 'yaegassy/coc-ruff', {'do': 'yarn install --frozen-lockfile'}
 endif
 
 " Golang
