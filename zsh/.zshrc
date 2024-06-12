@@ -123,9 +123,24 @@ conda deactivate
 fi
 
 export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
 
-eval "$(direnv hook zsh)"
+if [ -d "$PYENV_ROOT" ]; then
+    # otherwise, let's assume pyenv isn't installed
+    command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+else
+    echo "$PYENV_ROOT does not exist"
+fi
 
-eval "$(starship init zsh)"
+command -v direnv > /dev/null && eval "$(direnv hook zsh)"
+
+command -v starship > /dev/null && eval "$(starship init zsh)"
+
+export VOLTA_HOME="$HOME/.volta"
+
+if [ -d $VOLTA_HOME ]; then
+    export PATH="$VOLTA_HOME/bin:$PATH"
+fi
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
+
