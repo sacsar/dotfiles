@@ -50,7 +50,7 @@ rhel_nvim:
 
 # it's a little silly to include i3 and picom in os x
 stow:
-	stow -S -v nvim i3 picom zsh latexmk
+	stow -S -v --dotfiles nvim i3 picom zsh latexmk fish
 
 ombash:
 	bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
