@@ -1,6 +1,8 @@
+# ironically, use bash
 SHELL := /bin/bash
 
 XDG_DATA_HOME ?= $(HOME)/.local/share
+FISH := true
 
 default:
 	@echo "Run one of the following: mac, rhel, ubuntu, opensuse"
