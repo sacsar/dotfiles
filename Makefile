@@ -5,7 +5,7 @@ XDG_DATA_HOME ?= $(HOME)/.local/share
 FISH := true
 
 default:
-	@echo "Run one of the following: mac, rhel, ubuntu, opensuse"
+	@echo "Run one of the following: mac, rhel, ubuntu, suse"
 
 setup:
 	scripts/common.sh
@@ -19,7 +19,7 @@ ubuntu: | setup ubuntu_deps stow nvim_app_image
 
 manjaro: | setup manjaro_deps stow
 
-opensuse: | setup suse_deps stow
+suse: | setup suse_deps stow
 
 common_packages = stow jq starship
 
