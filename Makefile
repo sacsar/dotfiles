@@ -3,9 +3,12 @@ SHELL := /bin/bash
 
 XDG_DATA_HOME ?= $(HOME)/.local/share
 FISH := true
+ZSH := false
 
 default:
 	@echo "Run one of the following: mac, rhel, ubuntu, suse"
+
+include xdg.mk
 
 setup:
 	scripts/common.sh

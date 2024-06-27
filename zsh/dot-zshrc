@@ -1,5 +1,6 @@
 zstyle ':znap:*' plugins-dir $XDG_DATA_HOME/zsh
 zstyle ':znap:*' auto-compile no
+zstyle ':znap:*' repos-dir $XDG_DATA_HOME/zsh
 source $ZNAP_HOME/znap.zsh
 
 # znap will handle compinit for us

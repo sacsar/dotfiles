@@ -1,5 +1,5 @@
 # User configuration sourced by all invocations of the shell
-: ${ZNAP_HOME=${ZDOTDIR:-${HOME}/dotfiles/zsh}/.zsh-snap}
+: ${ZNAP_HOME=${ZDOTDIR:-${HOME}/dotfiles/zsh}/dot-zsh-snap}
 
 is_wsl() {
     if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
