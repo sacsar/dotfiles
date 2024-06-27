@@ -24,6 +24,9 @@ Plug 'tpope/vim-fugitive'
 "Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 """ Configure NERDTree
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
