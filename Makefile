@@ -55,7 +55,7 @@ rhel_nvim:
 	$(rhel_deps_INSTALL) neovim python36-neovim
 
 # it's a little silly to include i3 and picom in os x
-stow:
+stow: setup
 	stow -S -v --dotfiles nvim i3 picom zsh latexmk fish
 
 nvim_app_image:
