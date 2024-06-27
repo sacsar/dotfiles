@@ -10,8 +10,9 @@ default:
 
 include xdg.mk
 
-setup:
-	scripts/common.sh
+.PHONY: setup
+setup: xdg_dirs
+	git submodule update --init --recursive
 
 mac: | mac_deps stow setup
 	curl https://raw.githubusercontent.com/arcticicestudio/nord-iterm2/develop/src/xml/Nord.itermcolors -o $(HOME)/Nord.itermcolors
@@ -32,13 +33,13 @@ mac_deps_PACKAGES = $(common_packages) neovim tree ripgrep coreutils fzf tmux pa
 # omit wget for now should be there by default, I think
 
 rhel_deps_INSTALL = sudo yum install -y
-rhel_deps_PACKAGES = $(common_packages) tree pandoc
+rhel_deps_PACKAGES = $(common_packages) tree pandoc fish
 
 ubuntu_deps_INSTALL = sudo apt-get install -y
-ubuntu_deps_PACKAGES = $(common_packages) ripgrep fzf pandoc
+ubuntu_deps_PACKAGES = $(common_packages) ripgrep fzf pandoc fish
 
 manjaro_deps_INSTALL = sudo pacman -Sy
-manjaro_deps_PACKAGES = $(common_packages) tree ripgrep fzf xsel neovim pandoc
+manjaro_deps_PACKAGES = $(common_packages) tree ripgrep fzf xsel neovim pandoc fish
 
 suse_deps_INSTALL = sudo zypper in
 suse_deps_PACKAGES = $(common_packages) ripgrep fzf tmux neovim pandoc-cli fish
@@ -56,9 +57,6 @@ rhel_nvim:
 # it's a little silly to include i3 and picom in os x
 stow:
 	stow -S -v --dotfiles nvim i3 picom zsh latexmk fish
-
-ombash:
-	bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
 
 nvim_app_image:
 	scripts/neovim.sh
