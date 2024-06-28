@@ -1,3 +1,6 @@
 [submodule "zsh/dot-zsh-snap"]
 	path = zsh/dot-zsh-snap
 	url = https://github.com/marlonrichert/zsh-snap.git
+[submodule "tmux/dot-config/tmux/plugins/tpm"]
+	path = tmux/dot-config/tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
