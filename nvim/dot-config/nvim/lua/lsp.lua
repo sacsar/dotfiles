@@ -5,3 +5,7 @@ lspconfig.pyright.setup({
     capabilities = lsp_capabilities
 })
 lspconfig.ruff.setup{}
+
+lspconfig.clangd.setup({
+    capabilities = lsp_capabalities
+})
