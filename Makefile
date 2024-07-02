@@ -13,6 +13,7 @@ include xdg.mk
 .PHONY: setup
 setup: xdg_dirs
 	git submodule update --init --recursive
+	scripts/gitconfig.sh
 
 mac: | mac_deps stow setup
 	curl https://raw.githubusercontent.com/arcticicestudio/nord-iterm2/develop/src/xml/Nord.itermcolors -o $(HOME)/Nord.itermcolors
