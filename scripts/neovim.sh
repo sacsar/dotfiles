@@ -1,22 +1,9 @@
 #!/usr/bin/env bash
 
-start_dir=$(pwd)
-
-nvim_exists() {
-    # this can fail because we don't have ZSH's aliases because bash
-    type nvim > /dev/null;
-    $? || [ -f "$LOCAL_BIN/nvim.appimage" ]
-}
-
-if [[ nvim_exists ]]; then
-    echo "nvim already available; skipping"
-    cd $start_dir
-    exit 0
+if command -v nvim &>/dev/null; then
+  echo "nvim on path; skipping"
+else
+  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+  sudo rm -rf /opt/nvim
+  sudo tar -C /opt -xzf nvim-linux64.tar.gz
 fi
-
-cd $LOCAL_BIN
-
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-chmod u+x nvim.appimage
-
-cd $start_dir

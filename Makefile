@@ -2,65 +2,40 @@
 SHELL := /bin/bash
 
 XDG_DATA_HOME ?= $(HOME)/.local/share
+XDG_BIN_HOME ?= $(HOME)/.local/bin
 FISH := true
 ZSH := false
 
 default:
-	@echo "Run one of the following: mac, rhel, ubuntu, suse"
+	@echo "Run one of the following: mac, mariner, ubuntu, suse"
 
 include xdg.mk
+include tools.mk
+include stow.mk
 
 .PHONY: setup
 setup: xdg_dirs
-	git submodule update --init --recursive
-	scripts/gitconfig.sh
+	@git submodule update --init --recursive
+	@scripts/gitconfig.sh
 
 mac: | mac_deps stow setup
 	curl https://raw.githubusercontent.com/arcticicestudio/nord-iterm2/develop/src/xml/Nord.itermcolors -o $(HOME)/Nord.itermcolors
 
-rhel: | setup rhel_deps rhel_nvim rhel_fzf stow linux_rg
+mariner: | setup mariner_deps stow
 
-ubuntu: | setup ubuntu_deps stow nvim_app_image
+ubuntu: | setup ubuntu_deps stow
 
 manjaro: | setup manjaro_deps stow
 
 suse: | setup suse_deps stow
 
-common_packages = stow jq starship
-
-# Cover things that can be installed by package manager
-mac_deps_INSTALL = brew install
-mac_deps_PACKAGES = $(common_packages) neovim tree ripgrep coreutils fzf tmux pandoc
-# omit wget for now should be there by default, I think
-
-rhel_deps_INSTALL = sudo yum install -y
-rhel_deps_PACKAGES = $(common_packages) tree pandoc fish
-
-ubuntu_deps_INSTALL = sudo apt-get install -y
-ubuntu_deps_PACKAGES = $(common_packages) ripgrep fzf pandoc fish
-
-manjaro_deps_INSTALL = sudo pacman -Sy
-manjaro_deps_PACKAGES = $(common_packages) tree ripgrep fzf xsel neovim pandoc fish
-
-suse_deps_INSTALL = sudo zypper in
-suse_deps_PACKAGES = $(common_packages) ripgrep fzf tmux neovim pandoc-cli fish
-
-mac_deps rhel_deps ubuntu_deps manjaro_deps suse_deps:
-	$($@_INSTALL) $($@_PACKAGES)
-
 # putting this separately because I'm not sure it's available
-rhel_fzf:
-	$(rhel_deps_INSTALL) fzf
-
-rhel_nvim:
-	$(rhel_deps_INSTALL) neovim python36-neovim
+mariner_fzf:
+	$(mariner_INSTALL) fzf
 
 # it's a little silly to include i3 and picom in os x
-stow: setup
-	stow -S -v --dotfiles nvim i3 picom zsh latexmk fish starship wezterm
-
-nvim_app_image:
-	scripts/neovim.sh
+stow: setup stow_install
+	stow -S -v --dotfiles nvim i3 picom zsh latexmk fish
 
 dircolors:
 	curl https://raw.githubusercontent.com/arcticicestudio/nord-dircolors/develop/src/dir_colors -o $(HOME)/.dircolors
