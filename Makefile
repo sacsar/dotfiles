@@ -57,7 +57,7 @@ rhel_nvim:
 
 # it's a little silly to include i3 and picom in os x
 stow: setup
-	stow -S -v --dotfiles nvim i3 picom zsh latexmk fish
+	stow -S -v --dotfiles nvim i3 picom zsh latexmk fish starship wezterm
 
 nvim_app_image:
 	scripts/neovim.sh

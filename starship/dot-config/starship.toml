@@ -1,0 +1,8 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+[kubernetes]
+disabled = false
+
+[time]
+disabled = false
+format = '🕙[\[ $time \]]($style) '

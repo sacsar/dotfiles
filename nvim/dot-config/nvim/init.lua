@@ -4,6 +4,7 @@ vim.g.loaded_netrwPlugin = 1
 
 local map = vim.keymap.set
 local fn = vim.fn
+
 -- Configure lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then

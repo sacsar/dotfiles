@@ -1,6 +1,6 @@
 local map = vim.keymap.set
 
--- LSP mappings taken from nvim-emtals docs
+-- LSP mappings taken from nvim-metals docs
 map("n", "gd", vim.lsp.buf.definition)
 map("n", "K", vim.lsp.buf.hover)
 map("n", "gi", vim.lsp.buf.implementation)
@@ -12,6 +12,7 @@ map("n", "<leader>sh", vim.lsp.buf.signature_help)
 map("n", "<leader>rn", vim.lsp.buf.rename)
 map("n", "<leader>f", vim.lsp.buf.format)
 map("n", "<leader>ca", vim.lsp.buf.code_action)
+
 
 map("n", "<leader>ws", function()
 require("metals").hover_worksheet()

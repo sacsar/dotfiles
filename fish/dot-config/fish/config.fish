@@ -17,3 +17,5 @@ command -q starship; and starship init fish | source
 
 
 command -q pyenv; and pyenv init - | source
+set -gx VOLTA_HOME "$HOME/.volta"
+set -gx PATH "$VOLTA_HOME/bin" $PATH
