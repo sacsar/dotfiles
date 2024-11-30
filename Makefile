@@ -35,7 +35,7 @@ mariner_fzf:
 
 # it's a little silly to include i3 and picom in os x
 stow: setup stow_install
-	stow -S -v --dotfiles nvim i3 picom zsh latexmk fish
+	stow -S -v --dotfiles nvim i3 picom zsh latexmk fish wezterm
 
 dircolors:
 	curl https://raw.githubusercontent.com/arcticicestudio/nord-dircolors/develop/src/dir_colors -o $(HOME)/.dircolors
