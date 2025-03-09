@@ -9,3 +9,7 @@ lspconfig.ruff.setup{}
 lspconfig.clangd.setup({
     capabilities = lsp_capabalities
 })
+
+lspconfig.clojure_lsp.setup({
+    capabilities = lsp_capabalities    
+})
