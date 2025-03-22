@@ -1,6 +1,5 @@
 # Install tools I inevitably assume exist. Not really dotfiles, but skip frustration
 
-
 # I don't like this pattern of variables, but it does stop us from installing
 # both "manually" and via the package manager
 LINUX_NVIM_DEST ?= /opt/nvim-linux64/bin/nvim
@@ -40,8 +39,8 @@ mariner_deps: $(NEOVIM) $(STARSHIP)
 	$(mariner_INSTALL) $(mariner_PACKAGES)
 	$(MAKE) $(RIPGREP)
 
-/tmp/nvim-linux64.tar.gz:
-	curl -L -o $@ https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+/tmp/nvim-linux-x86_64.tar.gz:
+	curl -L -o $@ https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
 
 $(NEOVIM): | $(NEOVIM_PREREQ)
 	sudo rm -rf /opt/nvim

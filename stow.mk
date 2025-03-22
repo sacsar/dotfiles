@@ -2,6 +2,9 @@ STOW_VERSION := 2.4.0
 MIRROR_URL := https://mirrors.ocf.berkeley.edu/gnu/stow/
 PERL5LIB ?= $(HOME)/perl5/lib/perl5
 
+CPANM = $(shell which cpanm)
+CPANM := $(if $(CPANM),$(CPANM),$(PERL5LIB)/cpanm)
+
 STOW = $(shell which stow)
 STOW := $(if $(STOW),$(STOW),$(XDG_BIN_HOME)/stow)
 
