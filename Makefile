@@ -9,14 +9,16 @@ ZSH := false
 default:
 	@echo "Run one of the following: mac, mariner, ubuntu, suse"
 
-include xdg.mk
-include tools.mk
-include stow.mk
+# in order to facilitate the use of this repo as a submodule, include relative to the current makefile
+CURRENT_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
+include $(CURRENT_DIR)xdg.mk
+include $(CURRENT_DIR)tools.mk
+include $(CURRENT_DIR)stow.mk
 
 .PHONY: setup
 setup: xdg_dirs
 	@git submodule update --init --recursive
-	@scripts/gitconfig.sh
+	@$(CURRENT_DIR)scripts/gitconfig.sh
 
 mac: | mac_deps stow setup
 	curl https://raw.githubusercontent.com/arcticicestudio/nord-iterm2/develop/src/xml/Nord.itermcolors -o $(HOME)/Nord.itermcolors
