@@ -3,10 +3,10 @@ MIRROR_URL := https://mirrors.ocf.berkeley.edu/gnu/stow/
 PERL5LIB ?= $(HOME)/perl5/lib/perl5
 PERL5BIN ?= $(HOME)/perl5/bin
 
-CPANM = $(shell which cpanm)
-CPANM := $(if $(CPANM),$(CPANM),$(PERL5BIN)/cpanm)
+CPANM = $(shell command -v cpanm)
+CPANM := $(if $(CPANM),$(CPANM),$(PERL5LIB)/cpanm)
 
-STOW = $(shell which stow)
+STOW = $(shell command -v stow)
 STOW := $(if $(STOW),$(STOW),$(XDG_BIN_HOME)/stow)
 
 $(CPANM):

@@ -31,13 +31,11 @@ manjaro_PACKAGES = $(COMMON_PACKAGES)
 mariner_PACKAGES = $(filter-out ripgrep fzf neovim pandoc xsel,$(COMMON_PACKAGES)) awk tar
 darwin_PACKAGES = $(filter-out wget tmux xsel tree,$(COMMON_PACKAGES)) coreutils
 
-%_deps: $(STARSHIP)
+%_deps: | $(STARSHIP)
 	$($*_INSTALL) $($*_PACKAGES)
-
-# because we need to install neovim by hand for mariner, don't pattern match it
-mariner_deps: $(NEOVIM) $(STARSHIP)
-	$(mariner_INSTALL) $(mariner_PACKAGES)
+# because we install these via brew on darwin, use recursive make not a dependency
 	$(MAKE) $(RIPGREP)
+	$(MAKE) $(NEOVIM)
 
 /tmp/nvim-linux-x86_64.tar.gz:
 	curl -L -o $@ https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
@@ -62,6 +60,5 @@ $(RIPGREP): /tmp/rg.tar.gz
 	mkdir -p $(XDG_CONFIG_HOME)/bash_completion
 	tar xzf $< --wildcards '*/complete/rg.bash' --strip-components=2 -C $(XDG_CONFIG_HOME)/bash_completion
 
-/tmp/rg.tar.gz: RG_URL = $(shell scripts/ripgrep_linux.sh)
 /tmp/rg.tar.gz:
-	curl -sS -o $@ $(RG_URL)
+	curl -sS -o $@ http://github.com/BurntSushi/ripgrep/releases/latest/download/ripgrep-aarch64-unknown-linux.tar.gz

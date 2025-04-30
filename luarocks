@@ -1,0 +1,3 @@
+#!/bin/sh
+
+LUAROCKS_SYSCONFDIR='/etc/luarocks' exec '/usr/bin/luajit' -e 'package.path="/usr/share/lua/5.3/?.lua;/usr/share/lua/5.3/?/init.lua;/usr/lib64/lua/5.3/?.lua;/usr/lib64/lua/5.3/?/init.lua;./?.lua;./?/init.lua;/home/sebastian/.luarocks/share/lua/5.3/?.lua;/home/sebastian/.luarocks/share/lua/5.3/?/init.lua";package.cpath="/usr/lib64/lua/5.3/?.so;/usr/lib64/lua/5.3/loadall.so;./?.so;/home/sebastian/.luarocks/lib64/lua/5.3/?.so"' '/usr/bin/luarocks' --project-tree /home/sebastian/dotfiles/lua_modules "$@"
