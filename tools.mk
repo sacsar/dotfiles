@@ -24,7 +24,7 @@ darwin_INSTALL = brew install
 
 # define variables for the lists of packages we want to install
 # the most maintainable way to do this is have a common list
-COMMON_PACKAGES = jq tree fish wget pandoc ripgrep fzf tmux neovim xsel
+COMMON_PACKAGES = jq tree fish wget pandoc ripgrep fzf tmux xsel ncdu
 suse_PACKAGES = $(filter-out pandoc,$(COMMON_PACKAGES)) pandoc-cli
 ubuntu_PACKAGES = $(COMMON_PACKAGES)
 manjaro_PACKAGES = $(COMMON_PACKAGES)
@@ -43,7 +43,7 @@ mariner_deps: $(NEOVIM) $(STARSHIP)
 	curl -L -o $@ https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
 
 $(NEOVIM): | $(NEOVIM_PREREQ)
-	sudo rm -rf /opt/nvim
+	sudo rm -rf /opt/nvim*
 	sudo tar -C /opt -xzf $<
 
 $(STARSHIP): | $(STARSHIP_PREREQ)
