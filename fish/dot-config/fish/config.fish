@@ -5,7 +5,7 @@ end
 set -x LOCAL_BIN $HOME/.local/bin
 
 fish_add_path $LOCAL_BIN
-fish_add_path /opt/nvim-linux64/bin
+fish_add_path /opt/nvim-linux-x86_64/bin
 
 # if we're switching to fish after installing pyenv, we need to make sure it's on our path
 if test -d $HOME/.pyenv
