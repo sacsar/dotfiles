@@ -21,6 +21,7 @@ $(CPANM):
 .PHONY: stow_install
 stow_install: $(STOW)
 
-$(XDG_BIN_HOME)/stow: /tmp/stow-$(STOW_VERSION)
+$(XDG_BIN_HOME)/stow: /tmp/stow-$(STOW_VERSION) $(CPANM)
+	$(CPANM) --local-lib=$(HOME)/perl5 local::lib && eval $(perl -I ${PERL5LIB} -Mlocal::lib)
 	$(CPANM) install Test::Output
 	cd $< && ./configure --prefix=$(HOME)/.local --with-pmdir=$(PERL5LIB) && $(MAKE) install
