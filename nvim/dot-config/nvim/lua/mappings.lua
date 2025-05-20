@@ -13,9 +13,8 @@ map("n", "<leader>rn", vim.lsp.buf.rename)
 map("n", "<leader>f", vim.lsp.buf.format)
 map("n", "<leader>ca", vim.lsp.buf.code_action)
 
-
 map("n", "<leader>ws", function()
-require("metals").hover_worksheet()
+  require("metals").hover_worksheet()
 end)
 
 -- all workspace diagnostics
@@ -23,21 +22,21 @@ map("n", "<leader>aa", vim.diagnostic.setqflist)
 
 -- all workspace errors
 map("n", "<leader>ae", function()
-vim.diagnostic.setqflist({ severity = "E" })
+  vim.diagnostic.setqflist({ severity = "E" })
 end)
 
 -- all workspace warnings
 map("n", "<leader>aw", function()
-vim.diagnostic.setqflist({ severity = "W" })
+  vim.diagnostic.setqflist({ severity = "W" })
 end)
 
 -- buffer diagnostics only
 map("n", "<leader>d", vim.diagnostic.setloclist)
 
 map("n", "[c", function()
-vim.diagnostic.goto_prev({ wrap = false })
+  vim.diagnostic.goto_prev({ wrap = false })
 end)
 
 map("n", "]c", function()
-vim.diagnostic.goto_next({ wrap = false })
+  vim.diagnostic.goto_next({ wrap = false })
 end)

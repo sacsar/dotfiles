@@ -35,10 +35,9 @@ vim.g.indent_guides_start_level = 2
 vim.g.indent_guides_guide_size = 1
 
 if vim.fn.has("termguicolors") then
-    opt.termguicolors = true
+  opt.termguicolors = true
 end
 
 opt.signcolumn = "yes"
 -- completion
 vim.opt_global.completeopt = { "menuone", "noinsert", "noselect" }
-
