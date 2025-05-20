@@ -1,15 +1,15 @@
-local lspconfig = require('lspconfig')
-local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+local lspconfig = require("lspconfig")
+local lsp_capabilities = require("blink.cmp").get_lsp_capabilities()
 
 lspconfig.pyright.setup({
-    capabilities = lsp_capabilities
+	capabilities = lsp_capabilities,
 })
-lspconfig.ruff.setup{}
+lspconfig.ruff.setup({})
 
 lspconfig.clangd.setup({
-    capabilities = lsp_capabalities
+	capabilities = lsp_capabilities,
 })
 
 lspconfig.clojure_lsp.setup({
-    capabilities = lsp_capabalities    
+	capabilities = lsp_capabilities,
 })
