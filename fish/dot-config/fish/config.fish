@@ -27,5 +27,4 @@ end
 command -q starship; and starship init fish | source
 command -q pyenv; and pyenv init - | source
 command -q mise; and mise activate fish | source
-
-
+command -q direnv; and direnv hook fish | source
