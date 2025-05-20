@@ -14,4 +14,12 @@ if vim.fn.has("nvim-0.11") == 0 then
   lspconfig.clojure_lsp.setup({
     capabilities = lsp_capabilities,
   })
+else
+  vim.lsp.enable({
+    "pyright",
+    "ruff",
+    "clangd",
+    "clojure_lsp",
+    "lua_ls",
+  })
 end

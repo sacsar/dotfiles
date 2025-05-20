@@ -17,8 +17,9 @@ return {
             package_uninstalled = "✗",
           },
         },
-        { "neovim/nvim-lspconfig", event = "VeryLazy" },
       },
     },
+    { "neovim/nvim-lspconfig" },
   },
+  event = { "VeryLazy", "BufReadPre", "BufNewFile" },
 }
