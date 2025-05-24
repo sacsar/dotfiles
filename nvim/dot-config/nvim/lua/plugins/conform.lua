@@ -26,7 +26,7 @@ return {
             return { "isort", "black" }
           end
         end,
-        javascript = { { "prettierd", "prettier" } },
+        javascript = { "prettierd", "prettier" },
         scala = { "scalafmt" },
         sh = { "shfmt" },
         bash = { "shfmt" },
