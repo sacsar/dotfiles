@@ -58,7 +58,7 @@ return {
   {
     "saghen/blink.cmp",
     -- optional: provides snippets for the snippet source
-    dependencies = { "rafamadriz/friendly-snippets" },
+    dependencies = { "rafamadriz/friendly-snippets", "PaterJason/cmp-conjure" },
 
     -- use a release tag to download pre-built binaries
     version = "1.*",
@@ -98,6 +98,14 @@ return {
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
       },
+      -- not the right place
+      --      providers = {
+      --        -- conjure provider via blink.compat
+      --        conjure = {
+      --          name = "conjure",
+      --          model = "blink.compat.source",
+      --        },
+      --      },
 
       -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
       -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
@@ -108,27 +116,14 @@ return {
     },
     opts_extend = { "sources.default" },
   },
-  --  {
-  --      "hrsh7th/nvim-cmp",
-  --      dependencies = {
-  --        "neovim/nvim-lspconfig",
-  --        "hrsh7th/cmp-nvim-lsp",
-  --        "hrsh7th/cmp-buffer",
-  --        "hrsh7th/cmp-path",
-  --        "hrsh7th/cmp-cmdline"
-  --      },
-  --      event = "InsertEnter",
-  --      -- originally taken from https://github.com/scalameta/nvim-metals/discussions/39
-  --      opts = function()
-  --        local cmp = require("cmp")
-  --        local conf = {
-  --            sources = {
-  --                { name = "nvim_lsp" }
-  --            }
-  --        }
-  --        return conf
-  --      end
-  --  },
+  {
+    "saghen/blink.compat",
+    -- versions don't align with blink.cmp; this is a guess
+    version = "2.*",
+    lazy = true,
+    -- make sure to set opts so that lazy.nvim calls blink.compat's setup
+    opts = {},
+  },
   {
     "folke/trouble.nvim",
     config = true,
@@ -173,17 +168,6 @@ return {
     lazy = true,
     init = function()
       -- vim.g["conjure#debug"] = true
-    end,
-    dependencies = { "PaterJason/cmp-conjure" },
-  },
-  {
-    "PaterJason/cmp-conjure",
-    lazy = true,
-    config = function()
-      local cmp = require("cmp")
-      local config = cmp.get_config()
-      table.insert(config.sources, { name = "conjure" })
-      return cmp.setup(config)
     end,
   },
   -- structural editing
