@@ -167,6 +167,7 @@ return {
     ft = { "clojure", "fennel" },
     lazy = true,
     init = function()
+      vim.g["conjure#filetypes"] = { "clojure", "fennel", "lisp", "scheme" }
       -- vim.g["conjure#debug"] = true
     end,
   },
