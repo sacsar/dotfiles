@@ -23,6 +23,10 @@ if test -d "$HOME/.volta"
     set -gx PATH "$VOLTA_HOME/bin" $PATH
 end
 
+if test -e "$HOME/.config/fish/local.fish"
+    source "$HOME/.config/fish/local.fish"
+end
+
 # initialize various things if they're installed
 command -q starship; and starship init fish | source
 command -q pyenv; and pyenv init - | source
