@@ -99,13 +99,6 @@ return {
         default = { "lsp", "path", "snippets", "buffer" },
       },
       -- not the right place
-      --      providers = {
-      --        -- conjure provider via blink.compat
-      --        conjure = {
-      --          name = "conjure",
-      --          model = "blink.compat.source",
-      --        },
-      --      },
 
       -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
       -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
@@ -115,6 +108,13 @@ return {
       fuzzy = { implementation = "prefer_rust_with_warning" },
     },
     opts_extend = { "sources.default" },
+    providers = {
+      -- conjure provider via blink.compat
+      conjure = {
+        name = "conjure",
+        model = "blink.compat.source",
+      },
+    },
   },
   {
     "saghen/blink.compat",
