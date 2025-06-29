@@ -1,5 +1,5 @@
 .vscode/
 .netrwhist
-nvim/.config/nvim/autoload/
-nvim/.config/nvim/plugged/
-tmux/.config/tmux/plugins
+nvim/dot-config/nvim/autoload/
+nvim/dot-config/nvim/plugged/
+tmux/dot-config/tmux/plugins
