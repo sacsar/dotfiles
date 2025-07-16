@@ -196,4 +196,15 @@ return {
   "tpope/vim-sexp-mappings-for-regular-people",
   "tpope/vim-repeat",
   "tpope/vim-surround",
+  -- LaTeX
+  {
+    "lervag/vimtex",
+    lazy = false, -- the docs tell us to use lazy=false, which seems a little weird
+    init = function()
+      vim.g.vimtex_syntax_conceal = { sections = 1, math_delimiters = 0, math_bounds = 0 } -- disable concealment for now
+      -- TODO: Figure out how to fix the highlighting on conceal so it's legible. Defaults are
+      -- :highlight Conceal
+      -- Conceal        xxx ctermfg=239 guifg=Grey30
+    end,
+  },
 }
