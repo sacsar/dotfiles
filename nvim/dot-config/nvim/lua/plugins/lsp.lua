@@ -2,8 +2,10 @@ return {
   "mason-org/mason-lspconfig.nvim",
   opts = {
     ensure_installed = {
-      "ruff",
+      "jdtls",
+      "java-debug-adapter",
       "pyright",
+      "ruff",
     },
   },
   dependencies = {

@@ -57,7 +57,8 @@ else
     "clangd",
     "clojure_lsp",
     "lua_ls",
-    "jdtls",
+    -- disable jdtls in favor of nvim-jdtls
+    -- "jdtls",
     "rust_analyzer",
   })
 end
