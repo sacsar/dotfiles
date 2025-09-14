@@ -15,7 +15,7 @@ STARSHIP_INSTALL_URL := https://starship.rs/install.sh
 TMP_RG = $(shell command -v rg)
 RIPGREP = $(if $(TMP_RG),$(TMP_RG),$(XDG_BIN_HOME)/rg)
 
-# define variables for the installtion commands
+# define variables for the installation commands
 mariner_INSTALL = sudo dnf install -y
 suse_INSTALL = sudo zypper in -y
 manjaro_INSTALL = sudo pacman -Sy
