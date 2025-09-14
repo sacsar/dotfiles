@@ -3,7 +3,6 @@ return {
   opts = {
     ensure_installed = {
       "jdtls",
-      "java-debug-adapter",
       "pyright",
       "ruff",
     },
