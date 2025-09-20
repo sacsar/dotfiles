@@ -50,6 +50,10 @@ if vim.fn.has("nvim-0.11") == 0 then
   lspconfig.jdtls.setup({
     capabilities = lsp_capabilities,
   })
+
+  lspconfig.rust_analyzer.setup({
+    capabilities = lsp_capabilities,
+  })
 else
   vim.lsp.enable({
     "pyright",
