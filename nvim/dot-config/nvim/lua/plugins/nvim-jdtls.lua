@@ -7,9 +7,10 @@ return {
   },
   config = function()
     local root_dir = require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew" })
-    local workspace_dir = vim.fn.fnamemodify(root_dir, ":h") -- make sure it's an absolute path
+    local workspace_dir = vim.fn.fnamemodify(root_dir, ":p") -- make sure it's an absolute path
+    local data_dir = workspace_dir .. "/.jdlts"
     local config = {
-      cmd = { "jdtls", "-data", workspace_dir },
+      cmd = { "jdtls", "-data", data_dir },
       init_options = {},
     }
 

@@ -36,10 +36,9 @@ return {
     config = true,
   },
   {
-    -- use vim fugitive instead
     "lewis6991/gitsigns.nvim",
     config = true,
-    enabled = false,
+    enabled = true,
   },
   {
     "folke/which-key.nvim",
