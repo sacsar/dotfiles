@@ -27,6 +27,10 @@ if test -e "$HOME/.config/fish/local.fish"
     source "$HOME/.config/fish/local.fish"
 end
 
+if test -d "$HOME/.nix-profile/bin"
+    fish_add_path $HOME/.nix-profile/bin
+end
+
 # initialize various things if they're installed
 command -q starship; and starship init fish | source
 command -q pyenv; and pyenv init - | source
