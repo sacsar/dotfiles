@@ -1,3 +1,5 @@
+-- this file contains vim options that aren't split off into another module
+
 local opt = vim.opt
 
 opt.wildmenu = true

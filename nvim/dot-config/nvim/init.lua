@@ -16,8 +16,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
+
 -- load our configs
-require("core.settings")
+require("core.opts")
 require("core.folds")
 require("core.mappings")
 require("core.lsp")
