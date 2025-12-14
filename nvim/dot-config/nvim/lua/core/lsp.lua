@@ -1,3 +1,6 @@
+local tools = require("core.tools")
+local log = require("core.log")
+
 local M = {}
 
 local function attach_organize_imports(client, bufnr)
@@ -34,37 +37,14 @@ if vim.fn.has("nvim-0.11") == 0 then
   local lspconfig = require("lspconfig")
   local lsp_capabilities = require("blink.cmp").get_lsp_capabilities()
 
-  lspconfig.pyright.setup({
-    capabilities = lsp_capabilities,
-  })
-  lspconfig.ruff.setup({})
-
-  lspconfig.clangd.setup({
-    capabilities = lsp_capabilities,
-  })
-
-  lspconfig.clojure_lsp.setup({
-    capabilities = lsp_capabilities,
-  })
-
-  lspconfig.jdtls.setup({
-    capabilities = lsp_capabilities,
-  })
-
-  lspconfig.rust_analyzer.setup({
-    capabilities = lsp_capabilities,
-  })
+  for _, lsp in ipairs(tools.enabled_lsps) do
+    lspconfig[lsp].setup({ capabilities = lsp_capabilities })
+  end
 else
-  vim.lsp.enable({
-    "pyright",
-    "ruff",
-    "clangd",
-    "clojure_lsp",
-    "lua_ls",
-    -- disable jdtls in favor of nvim-jdtls
-    -- "jdtls",
-    "rust_analyzer",
-  })
+  -- Calls to vim.lsp.config(...) here take precedence over lsp/*.lua in the merge
+  -- See https://neovim.io/doc/user/lsp.html#lsp-config-merge
+  log.info("Enabling: ", tools.enabled_lsps)
+  vim.lsp.enable(tools.enabled_lsps)
 end
 
 M.attach_organize_imports = attach_organize_imports

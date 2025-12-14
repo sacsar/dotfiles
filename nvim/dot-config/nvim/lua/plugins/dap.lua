@@ -42,7 +42,7 @@ return {
     ---@type MasonNvimDapSettings
     opts = {
       -- This line is essential to making automatic installation work
-      -- :exploding-brain
+      -- :exploding-brain:
       handlers = {},
       automatic_installation = false,
       -- DAP servers: these will be installed by mason-tool-installer.nvim

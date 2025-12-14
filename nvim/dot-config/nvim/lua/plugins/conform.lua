@@ -1,3 +1,5 @@
+local tools = require("core.tools")
+
 return {
   {
     "stevearc/conform.nvim",
@@ -17,20 +19,7 @@ return {
     -- Everything in opts will be passed to setup()
     opts = {
       -- Define your formatters
-      formatters_by_ft = {
-        lua = { "stylua" },
-        python = function(bufnr)
-          if require("conform").get_formatter_info("ruff_format", bufnr).available then
-            return { "ruff_format" }
-          else
-            return { "isort", "black" }
-          end
-        end,
-        javascript = { "prettierd", "prettier" },
-        scala = { "scalafmt" },
-        sh = { "shfmt" },
-        bash = { "shfmt" },
-      },
+      formatters_by_ft = tools.formatters_by_ft,
       -- Set up format-on-save
       format_on_save = function(bufnr)
         -- Disable with a global or buffer-local variable
