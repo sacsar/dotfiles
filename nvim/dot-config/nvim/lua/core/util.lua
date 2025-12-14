@@ -1,5 +1,7 @@
 local M = {}
 
+local log = require("core.log")
+
 function M.map(t, f)
   if t == nil then
     return nil
@@ -15,16 +17,29 @@ function M.map(t, f)
 end
 
 M.Set = {}
+M.Set.__index = M.Set
 
-function M.Set:new(s)
-  s = s or {}
-  setmetatable(s, self)
-  self.__index = self
-  return s
+function M.Set:new(items)
+  s = {}
+  for _, v in pairs(items or {}) do
+    s[v] = true
+  end
+  return setmetatable(s, M.Set)
 end
 
 function M.Set:add(e)
   M.Set[e] = true
+end
+
+function M.Set:totable()
+  log.debug(self)
+  out = {}
+  for k, _ in pairs(self) do
+    log.debug("Inserting into output table: ", k)
+    table.insert(out, k)
+  end
+  log.debug("output table: ", out)
+  return out
 end
 
 return M

@@ -121,10 +121,10 @@ for ft, val in pairs(M.tools) do
     log.debug("val.lsp was nil for ", val)
   end
 
-  log.debug("lsp_set = ", lsp_set)
+  log.debug("lsp_set = ", lsp_set:totable())
 end
 
-for _, lsp in ipairs(lsp_set) do
+for _, lsp in ipairs(lsp_set:totable()) do
   log.debug(lsp)
   table.insert(M.enabled_lsps, lsp)
 end
