@@ -6,3 +6,4 @@ tmux/dot-config/tmux/plugins
 /luarocks
 /lua_modules
 /.luarocks
+/lua
