@@ -1,6 +1,6 @@
 local M = {}
 
-local log = require("core.log")
+local log = require("core.nvim.log")
 
 function M.map(t, f)
   if t == nil then

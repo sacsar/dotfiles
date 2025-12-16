@@ -1,8 +1,8 @@
 -- lua/core/tools.lua
 local M = {}
 
-local log = require("core.log")
-local util = require("core.util")
+local log = require("core.nvim.log")
+local util = require("core.nvim.util")
 
 ---@alias MasonTool {[1]: string, [2]: boolean}
 

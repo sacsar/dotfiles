@@ -27,7 +27,7 @@ This repository contains the user's dotfiles. Focus on minimal, safe edits and p
 
 - **Editing guidelines & examples**
   - To add a new dotfile set: create `<tool>/dot-config/<tool>/...` and update the `stow` target in the `Makefile` (and `stow` invocation list). Keep `stow_install` logic isolated in `stow.mk`.
-  - To adjust Neovim behavior, prefer editing `nvim/dot-config/nvim/lua/*` modules (the repo uses `require("core.opts")`, `core.mappings`, etc.). Keep `init.lua` bootstrap minimal.
+  - To adjust Neovim behavior, prefer editing `nvim/dot-config/nvim/lua/*` modules (the repo uses `require("core.nvim.opts")`, `core.mappings`, etc.). Keep `init.lua` bootstrap minimal.
   - Example: implement a small plugin config -> add to `nvim/dot-config/nvim/lua/plugins` and ensure `require("plugins")` is reachable by `init.lua` via the `lazy.nvim` setup.
 
 - **Integration points & external dependencies**

@@ -1,4 +1,4 @@
-local tools = require("core.tools")
+local tools = require("core.nvim.tools")
 
 return {
   {

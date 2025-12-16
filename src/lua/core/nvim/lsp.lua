@@ -1,5 +1,5 @@
-local tools = require("core.tools")
-local log = require("core.log")
+local tools = require("core.nvim.tools")
+local log = require("core.nvim.log")
 
 local M = {}
 

@@ -18,10 +18,10 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
 
 -- load our configs
-require("core.opts")
-require("core.folds")
-require("core.mappings")
-require("core.lsp")
+require("core.nvim.opts")
+require("core.nvim.folds")
+require("core.nvim.mappings")
+require("core.nvim.lsp")
 
 -- TODO: Move this somewhere more sensible.
 vim.api.nvim_create_user_command("Format", function(args)
