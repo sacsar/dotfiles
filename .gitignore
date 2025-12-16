@@ -4,6 +4,5 @@ nvim/dot-config/nvim/autoload/
 nvim/dot-config/nvim/plugged/
 tmux/dot-config/tmux/plugins
 /luarocks
-lua
 /lua_modules
 /.luarocks
