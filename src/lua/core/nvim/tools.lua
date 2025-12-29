@@ -96,6 +96,7 @@ for ft, val in pairs(M.tools) do
       M.formatters_by_ft[ft] = { val.formatters }
     elseif type(val.formatters) == "table" then
       M.formatters_by_ft[ft] = {}
+      ---@diagnostic disable-next-line: param-type-mismatch
       for _, formatter in ipairs(val.formatters) do
         if formatter.conform_formatters ~= nil then
           for _, cf in ipairs(formatter.conform_formatters) do
@@ -112,6 +113,7 @@ for ft, val in pairs(M.tools) do
     if type(val.lsp) == "string" then
       lsp_set:add(val.lsp)
     elseif type(val.lsp) == "table" then
+      ---@diagnostic disable-next-line: param-type-mismatch
       for _, lsp in ipairs(val.lsp) do
         lsp_set:add(lsp.name)
       end
