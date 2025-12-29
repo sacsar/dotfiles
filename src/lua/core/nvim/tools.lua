@@ -91,7 +91,6 @@ M.enabled_lsps = {}
 local lsp_set = util.Set:new()
 
 for ft, val in pairs(M.tools) do
-  log.debug("Processing tools for ", ft)
   if val.formatters ~= nil then
     if type(val.formatters) == "string" then
       M.formatters_by_ft[ft] = { val.formatters }
@@ -117,15 +116,10 @@ for ft, val in pairs(M.tools) do
         lsp_set:add(lsp.name)
       end
     end
-  else
-    log.debug("val.lsp was nil for ", val)
   end
-
-  log.debug("lsp_set = ", lsp_set:totable())
 end
 
 for _, lsp in ipairs(lsp_set:totable()) do
-  log.debug(lsp)
   table.insert(M.enabled_lsps, lsp)
 end
 

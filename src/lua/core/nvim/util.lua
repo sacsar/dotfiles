@@ -1,7 +1,5 @@
 local M = {}
 
-local log = require("core.nvim.log")
-
 function M.map(t, f)
   if t == nil then
     return nil
@@ -20,7 +18,7 @@ M.Set = {}
 M.Set.__index = M.Set
 
 function M.Set:new(items)
-  s = {}
+  local s = {}
   for _, v in pairs(items or {}) do
     s[v] = true
   end
@@ -34,10 +32,8 @@ end
 function M.Set:totable()
   local out = {}
   for k, _ in pairs(self) do
-    log.debug("Inserting into output table: ", k)
     table.insert(out, k)
   end
-  log.debug("output table: ", out)
   return out
 end
 

@@ -43,7 +43,6 @@ if vim.fn.has("nvim-0.11") == 0 then
 else
   -- Calls to vim.lsp.config(...) here take precedence over lsp/*.lua in the merge
   -- See https://neovim.io/doc/user/lsp.html#lsp-config-merge
-  log.info("Enabling: ", tools.enabled_lsps)
   vim.lsp.enable(tools.enabled_lsps)
 end
 
