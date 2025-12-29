@@ -1,5 +1,7 @@
 # https://taskfile.dev
 
+# Task is used purely for building/testing the lua code. Actual setup is via make + bootstrap.sh
+
 version: '3'
 
 vars:
