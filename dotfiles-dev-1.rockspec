@@ -1,3 +1,5 @@
+rockspec_format = "3.0"
+
 package = "dotfiles"
 version = "dev-1"
 source = {
@@ -10,6 +12,12 @@ description = {
 dependencies = {
 	"lua >= 5.1",
 }
+
+test_dependencies = {
+	"busted >= 2.2.0",
+	"inspect >= 3.1.3",
+}
+
 build = {
 	type = "builtin",
 	modules = {
@@ -22,4 +30,8 @@ build = {
 		["core.nvim.tools"] = "src/lua/core/nvim/tools.lua",
 		["core.nvim.util"] = "src/lua/core/nvim/util.lua",
 	},
+}
+
+test = {
+	type = "busted",
 }

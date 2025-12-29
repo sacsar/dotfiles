@@ -1,0 +1,24 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+    silent: true
+
+  build:
+    sources:
+      - src/lua/**/*.lua
+      - dotfiles-dev-1.rockspec
+    cmds:
+      - ./luarocks make
+
+  test:
+    deps: [build]
+    cmds:
+      - ./luarocks test -- {{.CLI_ARGS}}

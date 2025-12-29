@@ -7,3 +7,4 @@ tmux/dot-config/tmux/plugins
 /lua_modules
 /.luarocks
 /lua
+.task

@@ -1,8 +1,29 @@
--- thank you chat gpt
--- lua/core/log.lua
 local M = {}
 
-local levels = vim.log.levels
+-- Annoyingly, we want to make a logger setup that can
+-- use vim.notify when available and lualogging when *that*'s available
+
+local logger
+local levels
+local inspect
+
+if vim ~= nil then
+  levels = vim.log.levels
+  inspect = function(...) end
+else
+  inspect = require("inspect")
+  logger = require("logging.console")({
+    logPattern = "%date %level %message \n",
+    timestampPattern = "!%Y-%m-%dT%H:%M:%S.%qZ",
+  })
+  levels = {
+    trace = logger.DEBUG,
+    debug = logger.DEBUG,
+    info = logger.INFO,
+    warn = logger.WARN,
+    error = logger.ERROR,
+  }
+end
 
 -- Render any object safely
 local function render(obj)
@@ -27,7 +48,7 @@ local function src()
   return string.format("[%s:%s]", file, line)
 end
 
-local function write(level_name, ...)
+local function nvim_write(level_name, ...)
   local args = { ... }
 
   -- First argument may be a category tag
@@ -43,6 +64,16 @@ local function write(level_name, ...)
   vim.notify(category .. msg, level)
 end
 
+local function write(level_name, ...)
+  if vim ~= nil then
+    local args = { ... }
+    nvim_write(level_name, args)
+  else
+    local args = { ... }
+    logger:log(levels[level_name], args)
+  end
+end
+
 M.trace = function(...)
   write("trace", src(), ...)
 end
@@ -56,7 +87,7 @@ M.warn = function(...)
   write("warn", src(), ...)
 end
 M.error = function(...)
-  write("error", ...)
+  write("error", src(), ...)
 end
 
 return M

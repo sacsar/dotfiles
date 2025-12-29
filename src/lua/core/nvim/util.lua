@@ -28,12 +28,11 @@ function M.Set:new(items)
 end
 
 function M.Set:add(e)
-  M.Set[e] = true
+  self[e] = true
 end
 
 function M.Set:totable()
-  log.debug(self)
-  out = {}
+  local out = {}
   for k, _ in pairs(self) do
     log.debug("Inserting into output table: ", k)
     table.insert(out, k)
