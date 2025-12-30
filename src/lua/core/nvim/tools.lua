@@ -28,7 +28,7 @@ M.tools = {
   lua = { formatters = "stylua", lsp = "lua_ls" },
   python = {
     formatters = { { name = "ruff", conform_formatters = { "ruff_fix", "ruff_organize_imports", "ruff_format" } } },
-    lsp = "ruff",
+    lsp = "pyright",
   },
   javascript = { formatters = "prettierd" },
   scala = { formatters = { { name = "scalafmt", install = false } }, lsp = { { name = "metals", install = false } } },
