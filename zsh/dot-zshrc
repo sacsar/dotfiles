@@ -135,7 +135,11 @@ command -v direnv > /dev/null && eval "$(direnv hook zsh)"
 
 command -v starship > /dev/null && eval "$(starship init zsh)"
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
+if [[ -z "$CURSOR_TRACE_ID" ]]; then 
+    # disable iterm2 integration for cursor agents
+    # See https://github.com/cursor/cursor/issues/2904
+    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
+fi
 
 test -e "${HOME}/.asdf/asdf.sh" && source "$HOME/.asdf/asdf.sh" || true
 
