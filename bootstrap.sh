@@ -1,11 +1,13 @@
 #!/bin/bash
+# shellcheck disable=SC2034
 
 set -eou pipefail
 
 install_darwin="brew install"
-install_mariner="yum install -y"
+install_mariner="dnf install -y"
 install_suse="zypper in -y"
 install_manjaro="pacman -Sy"
+install_ubuntu="apt-get install -y"
 
 determine_variant() {
   UNAME=$(uname)
@@ -32,21 +34,25 @@ determine_variant() {
 install() {
   if [[ $VARIANT != "darwin" ]]; then
     echo "Installing $1. Expect to be prompted for sudo."
-    sudo $"install_$VARIANT" $1
+    sudo $"install_$VARIANT" "$1"
   else
-    brew install $1
+    brew install "$1"
   fi
 }
 
 VARIANT=$(determine_variant)
 
-if [[ "$VARIANT" != "mariner" ]]; then
-  if ! command -v stow &>/dev/null; then
-    install stow
-  fi
-fi
-
 if ! command -v make &>/dev/null; then
   echo "make not found on the path. Attempting to install."
   install make
 fi
+
+if ! command -v stow &>/dev/null; then
+  if [[ "$VARIANT" != "mariner" ]]; then
+      install stow
+    else 
+      make stow_install
+    fi
+fi
+
+make "$VARIANT"

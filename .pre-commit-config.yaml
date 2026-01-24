@@ -3,3 +3,15 @@ repos:
     rev: v2.1.0
     hooks:
     - id: stylua
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
+    hooks:
+    -   id: shellcheck
+  - repo: https://github.com/pecigonzalo/pre-commit-shfmt
+    # note: requires shfmt on path
+    rev: v2.2.0
+    hooks:
+      - id: shell-fmt
+        args:
+          - -i
+          - "2"
