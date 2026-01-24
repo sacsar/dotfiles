@@ -4,3 +4,12 @@
 [submodule "tmux/dot-config/tmux/plugins/tpm"]
 	path = tmux/dot-config/tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "specs/bats"]
+	path = specs/bats
+	url = https://github.com/bats-core/bats-core.git
+[submodule "specs/test_helper/bats-support"]
+	path = specs/test_helper/bats-support
+	url = https://github.com/bats-core/bats-support.git
+[submodule "specs/test_helper/bats-assert"]
+	path = specs/test_helper/bats-assert
+	url = https://github.com/bats-core/bats-assert.git
