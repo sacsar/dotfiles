@@ -12,6 +12,12 @@ repos:
     rev: v2.2.0
     hooks:
       - id: shell-fmt
+        files: |
+          (?x)^(
+            .*\.sh$|
+            .*\.bash$|
+            .*zsh(rc|env)$
+          )
         args:
           - -i
           - "2"
