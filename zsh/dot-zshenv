@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148
 # User configuration sourced by all invocations of the shell
 : ${ZDOTDIR=${ZDOTDIR:-"$HOME"}}
 : ${ZNAP_HOME=${ZNAP_HOME:-${HOME}/dotfiles/zsh/dot-zsh-snap}}
@@ -14,7 +15,8 @@ is_wsl() {
 
 export EDITOR="nvim"
 
-export IS_WSL=$(is_wsl)
+IS_WSL=$(is_wsl)
+export IS_WSL
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.local/cache"
