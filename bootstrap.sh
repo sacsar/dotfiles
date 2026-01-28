@@ -40,19 +40,22 @@ install() {
   fi
 }
 
-VARIANT=$(determine_variant)
+# Only execute main logic if script is run directly, not when sourced
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  VARIANT=$(determine_variant)
 
-if ! command -v make &>/dev/null; then
-  echo "make not found on the path. Attempting to install."
-  install make
+  if ! command -v make &>/dev/null; then
+    echo "make not found on the path. Attempting to install."
+    install make
+  fi
+
+  if ! command -v stow &>/dev/null; then
+    if [[ "$VARIANT" != "mariner" ]]; then
+        install stow
+      else 
+        make stow_install
+      fi
+  fi
+
+  make "$VARIANT"
 fi
-
-if ! command -v stow &>/dev/null; then
-  if [[ "$VARIANT" != "mariner" ]]; then
-      install stow
-    else 
-      make stow_install
-    fi
-fi
-
-make "$VARIANT"

@@ -21,6 +21,18 @@ tasks:
       - ./luarocks make
 
   test:
+    desc: Run all tests (Lua and shell)
+    cmds:
+      - task: test-lua
+      - task: test-shell
+
+  test-lua:
+    desc: Run Lua tests with busted
     deps: [build]
     cmds:
       - ./luarocks test -- {{.CLI_ARGS}}
+
+  test-shell:
+    desc: Run shell tests with bats
+    cmds:
+      - spec/bats/bin/bats spec/bootstrap.bats {{.CLI_ARGS}}
