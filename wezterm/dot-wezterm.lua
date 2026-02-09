@@ -12,6 +12,10 @@ config.font_size = 12
 if os.getenv("SWAYSOCK") then
   -- match openSUSEway alacritty
   config.window_background_opacity = 0.75
+  config.window_frame = {
+    inactive_titlebar_bg = "none",
+    active_titlebar_bg = "none",
+  }
 else
   config.color_scheme = "nord"
 end
