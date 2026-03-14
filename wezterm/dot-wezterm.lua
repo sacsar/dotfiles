@@ -16,6 +16,7 @@ if os.getenv("SWAYSOCK") then
     inactive_titlebar_bg = "none",
     active_titlebar_bg = "none",
   }
+  config.color_scheme = "nord"
 else
   config.color_scheme = "nord"
 end
