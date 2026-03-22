@@ -2,6 +2,7 @@
 local M = {}
 
 local log = require("core.nvim.log")
+local ctx = require("core.nvim.context")
 local util = require("core.nvim.util")
 
 ---@alias MasonTool {[1]: string, [2]: boolean}
@@ -39,6 +40,11 @@ M.tools = {
   cpp = { lsp = "clangd" },
   rust = { lsp = "rust_analyzer" },
 }
+
+-- swap in any tools defined in the local context. Let's treat these as overrides for now.
+for ft, ft_tools in pairs(ctx.extra_tools or {}) do
+  M.tools[ft] = ft_tools
+end
 
 --- Convert a Formatter or Lsp to a MasonTool
 ---@param x string|Tool|nil

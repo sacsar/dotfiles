@@ -6,7 +6,6 @@
   },
   "workspace": {
     "library": [
-        "${workspaceFolder}/dot-config/nvim/lua",
         "${HOME}/.local/share/nvim/lazy/mason.nvim/lua"
     ]
   }

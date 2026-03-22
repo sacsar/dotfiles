@@ -2,6 +2,7 @@
 .netrwhist
 nvim/dot-config/nvim/autoload/
 nvim/dot-config/nvim/plugged/
+nvim/dot-config/nvim/lua/context_local.lua
 tmux/dot-config/tmux/plugins
 /luarocks
 /lua_modules
