@@ -57,8 +57,9 @@ end, {
 vim.cmd([[
     " terminal mode stuff
 augroup neovim_terminal
-        " get us back into a normal mode where we can change windows
-   :tnoremap <Esc> <C-\><C-n>
+   " get us back into a normal mode where we can change windows
+   ":tnoremap <Esc> <C-\><C-n> -- this conflicts with claude
+   :tnoremap <C-q> <C-\><C-n>
         " see https://stackoverflow.com/a/63909865
    autocmd!
         " Enter Terminal-mode (insert) automatically

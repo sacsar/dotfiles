@@ -5,6 +5,7 @@ return {
     "mfussenegger/nvim-dap",
     "mason-org/mason-lspconfig.nvim",
   },
+  enabled = false,
   config = function()
     local root_dir = require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew" })
     local workspace_dir = vim.fn.fnamemodify(root_dir, ":p") -- make sure it's an absolute path
