@@ -1,5 +1,4 @@
 local tools = require("core.nvim.tools")
-local log = require("core.nvim.log")
 
 local M = {}
 
@@ -33,7 +32,7 @@ local function attach_organize_imports(client, bufnr)
   end
 end
 
-if vim.fn.has("nvim-0.11") == 0 then
+if vim.version.lt(vim.version(), { 0, 11, 0 }) then
   local lspconfig = require("lspconfig")
   local lsp_capabilities = require("blink.cmp").get_lsp_capabilities()
 
@@ -44,6 +43,9 @@ else
   -- Calls to vim.lsp.config(...) here take precedence over lsp/*.lua in the merge
   -- See https://neovim.io/doc/user/lsp.html#lsp-config-merge
   vim.lsp.enable(tools.enabled_lsps)
+  vim.api.nvim_create_user_command("LspInfo", function()
+    vim.cmd("checkhealth vim.lsp")
+  end, { desc = "Show LSP status (via checkhealth)" })
 end
 
 M.attach_organize_imports = attach_organize_imports
