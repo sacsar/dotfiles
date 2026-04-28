@@ -73,6 +73,7 @@ return {
     init = function()
       vim.g.indentLine_char = "⦙"
     end,
+    enabled = false,
   },
   {
     "saghen/blink.cmp",
