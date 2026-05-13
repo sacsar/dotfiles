@@ -38,3 +38,10 @@ command -q mise; and mise activate fish | source
 command -q direnv; and direnv hook fish | source
 
 command -q task; and task --completion fish | source
+
+switch (uname)
+    case Darwin
+        fish_add_path "$HOME/Library/Application Support/Coursier/bin"
+    case '*'
+        fish_add_path "$HOME/.local/share/cs/bin"
+end

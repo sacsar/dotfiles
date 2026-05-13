@@ -1,42 +1,31 @@
 local map = vim.keymap.set
 
--- LSP mappings taken from nvim-metals docs
-map("n", "gd", vim.lsp.buf.definition)
-map("n", "K", vim.lsp.buf.hover)
-map("n", "gi", vim.lsp.buf.implementation)
-map("n", "gr", vim.lsp.buf.references)
-map("n", "gds", vim.lsp.buf.document_symbol)
-map("n", "gws", vim.lsp.buf.workspace_symbol)
-map("n", "<leader>cl", vim.lsp.codelens.run)
-map("n", "<leader>sh", vim.lsp.buf.signature_help)
-map("n", "<leader>rn", vim.lsp.buf.rename)
-map("n", "<leader>f", vim.lsp.buf.format)
-map("n", "<leader>ca", vim.lsp.buf.code_action)
+-- LSP keymaps not covered by nvim 0.11+ built-in defaults.
+-- Built-ins already provide: K, grr (refs), gri (impl), grn (rename),
+-- gra (code action), gO (doc symbol), i_<C-s> (signature help).
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local opts = { buffer = args.buf }
+    map("n", "gd", vim.lsp.buf.definition, opts)
+    map("n", "gD", vim.lsp.buf.type_definition, opts)
+    map("n", "gws", vim.lsp.buf.workspace_symbol, opts)
+    map("n", "<leader>cL", vim.lsp.codelens.run, opts)
+    map("n", "<leader>f", vim.lsp.buf.format, opts)
+    -- metals-specific
+    map("n", "<leader>ws", function()
+      require("metals").hover_worksheet()
+    end, opts)
+  end,
+})
 
-map("n", "<leader>ws", function()
-  require("metals").hover_worksheet()
-end)
-
--- all workspace diagnostics
-map("n", "<leader>aa", vim.diagnostic.setqflist)
-
--- all workspace errors
-map("n", "<leader>ae", function()
+-- Diagnostics — jumps use built-in [d / ]d (nvim 0.10+).
+-- Quickfix / loclist live under <leader>q* (moved off <leader>a* which sidekick
+-- owns, and <leader>d which collides with the dap/metals debug namespace).
+map("n", "<leader>qa", vim.diagnostic.setqflist, { desc = "Workspace diagnostics → qflist" })
+map("n", "<leader>qe", function()
   vim.diagnostic.setqflist({ severity = "E" })
-end)
-
--- all workspace warnings
-map("n", "<leader>aw", function()
+end, { desc = "Workspace errors → qflist" })
+map("n", "<leader>qw", function()
   vim.diagnostic.setqflist({ severity = "W" })
-end)
-
--- buffer diagnostics only
-map("n", "<leader>d", vim.diagnostic.setloclist)
-
-map("n", "[c", function()
-  vim.diagnostic.goto_prev({ wrap = false })
-end)
-
-map("n", "]c", function()
-  vim.diagnostic.goto_next({ wrap = false })
-end)
+end, { desc = "Workspace warnings → qflist" })
+map("n", "<leader>qd", vim.diagnostic.setloclist, { desc = "Buffer diagnostics → loclist" })

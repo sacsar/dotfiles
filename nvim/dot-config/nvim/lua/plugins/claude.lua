@@ -45,6 +45,8 @@ return {
     },
     keys = {
       {
+        -- Insert-mode only: normal-mode <Tab> == <C-i> (jumplist forward),
+        -- and we don't want to shadow that.
         "<tab>",
         function()
           -- if there is a next edit, jump to it, otherwise apply it if any
@@ -52,6 +54,7 @@ return {
             return "<Tab>" -- fallback to normal tab
           end
         end,
+        mode = "i",
         expr = true,
         desc = "Goto/Apply Next Edit Suggestion",
       },

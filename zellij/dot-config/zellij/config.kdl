@@ -1,0 +1,14 @@
+// Unbind chords that nvim (or other terminal apps) want to handle directly.
+// Without these, zellij intercepts them and they never reach nvim.
+keybinds {
+    normal {
+        unbind "Ctrl q"   // nvim terminal-mode escape — also: don't kill the session by accident
+        unbind "Ctrl o"   // nvim NvimTreeToggle
+        unbind "Ctrl p"   // blink.cmp previous completion item
+        unbind "Ctrl n"   // blink.cmp next completion item
+        unbind "Ctrl s"   // common save / coc-range-select
+        unbind "Ctrl t"   // vim tag-pop
+        unbind "Ctrl g"   // vim file-info
+        unbind "Ctrl h"   // vim backspace / window-left
+    }
+}
