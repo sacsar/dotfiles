@@ -29,3 +29,8 @@ map("n", "<leader>qw", function()
   vim.diagnostic.setqflist({ severity = "W" })
 end, { desc = "Workspace warnings → qflist" })
 map("n", "<leader>qd", vim.diagnostic.setloclist, { desc = "Buffer diagnostics → loclist" })
+
+map({ "n", "i", "v" }, "<ScrollWheelUp>", "<C-y>")
+map({ "n", "i", "v" }, "<ScrollWheelDown>", "<C-e>")
+-- Cursor doesn't follow scroll. Keep this here with the mouse behaviour
+vim.opt.scrolloff = 0

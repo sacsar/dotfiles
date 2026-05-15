@@ -39,6 +39,8 @@ M.tools = {
   c = { lsp = "clangd" },
   cpp = { lsp = "clangd" },
   rust = { lsp = "rust_analyzer" },
+  java = { lsp = "java_lsp", install = false },
+  proto = { lsp = "buf-lsp", install = false },
 }
 
 -- swap in any tools defined in the local context. Let's treat these as overrides for now.
