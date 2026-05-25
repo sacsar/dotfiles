@@ -30,7 +30,16 @@ map("n", "<leader>qw", function()
 end, { desc = "Workspace warnings → qflist" })
 map("n", "<leader>qd", vim.diagnostic.setloclist, { desc = "Buffer diagnostics → loclist" })
 
-map({ "n", "i", "v" }, "<ScrollWheelUp>", "<C-y>")
-map({ "n", "i", "v" }, "<ScrollWheelDown>", "<C-e>")
+map({ "n", "v" }, "<ScrollWheelUp>", "<C-y>")
+map({ "n", "v" }, "<ScrollWheelDown>", "<C-e>")
+-- Insert mode: <C-y>/<C-e> are completion shortcuts, so use <Cmd> to run
+-- the normal-mode scroll commands without leaving insert mode.
+map("i", "<ScrollWheelUp>", "<Cmd>normal! <C-y><CR>")
+map("i", "<ScrollWheelDown>", "<Cmd>normal! <C-e><CR>")
 -- Cursor doesn't follow scroll. Keep this here with the mouse behaviour
 vim.opt.scrolloff = 0
+
+-- blink.cmp's Tab fallback re-feeds <Tab> without noremap, causing an infinite
+-- mapping loop with sidekick.nvim's expr <Tab> mapping. A global noremap wins
+-- over both and simply inserts a tab (expanded to spaces via expandtab).
+map("i", "<Tab>", "<Tab>", { noremap = true })

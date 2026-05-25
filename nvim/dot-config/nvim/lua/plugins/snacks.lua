@@ -4,12 +4,14 @@ return {
   lazy = false,
   ---@type snacks.Config
   opts = {
+    animate = { enabled = false },
     bufdelete = { enabled = true },
     gh = {},
     indent = { enabled = true },
     lazygit = { enabled = true },
     picker = { enabled = true },
     scratch = { enabled = true },
+    words = { enabled = false },
   },
   keys = {
     {
