@@ -44,20 +44,22 @@ return {
       },
     },
     keys = {
-      {
-        -- Insert-mode only: normal-mode <Tab> == <C-i> (jumplist forward),
-        -- and we don't want to shadow that.
-        "<tab>",
-        function()
-          -- if there is a next edit, jump to it, otherwise apply it if any
-          if not require("sidekick").nes_jump_or_apply() then
-            return "<Tab>" -- fallback to normal tab
-          end
-        end,
-        mode = "i",
-        expr = true,
-        desc = "Goto/Apply Next Edit Suggestion",
-      },
+      -- keeping this for posterity, but as written, it fights with blink.cmp
+      --{
+      -- Insert-mode only: normal-mode <Tab> == <C-i> (jumplist forward),
+      -- and we don't want to shadow that.
+      -- "<tab>",
+      --function()
+      -- if there is a next edit, jump to/apply it; otherwise insert a
+      -- literal Tab. feedkeys with mode "n" is non-recursive, so the
+      -- fallback can't re-trigger this same mapping (which would hang).
+      --if not require("sidekick").nes_jump_or_apply() then
+      --  vim.api.nvim_feedkeys(vim.keycode("<Tab>"), "n", false)
+      --end
+      --end,
+      --mode = "i",
+      --desc = "Goto/Apply Next Edit Suggestion",
+      --},
       {
         "<c-.>",
         function()
