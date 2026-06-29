@@ -9,3 +9,4 @@ tmux/dot-config/tmux/plugins
 /.luarocks
 /lua
 .task
+fish/dot-config/fish/fish_variables
