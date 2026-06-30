@@ -1,4 +1,4 @@
-# shellheck shell=zsh
+# shellcheck shell=zsh
 source "$ZNAP_HOME"/znap.zsh
 zstyle ':znap:*' plugins-dir "$XDG_DATA_HOME"/zsh
 zstyle ':znap:*' auto-compile no
@@ -73,10 +73,8 @@ bindkey -e  # too much muscle memory for -v
 ###### LOCAL CONFIG
 if [ -f "$ZDOTDIR/.zshrc.local" ]; then
     source "$ZDOTDIR/.zshrc.local"
-else 
-    if [ -f "$HOME/.zshrc.local" ]; then
+elif [ -f "$HOME/.zshrc.local" ]; then
     source "$HOME/.zshrc.local"
-fi
 fi
 
 # ------------------------------
@@ -103,33 +101,12 @@ bindkey '^N' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/var/lib/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/var/lib/conda/etc/profile.d/conda.sh" ]; then
-        . "/var/lib/conda/etc/profile.d/conda.sh"
-    else
-        export PATH="/var/lib/conda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-if which conda > /dev/null; then
-conda deactivate
-fi
 
 export PYENV_ROOT="$HOME/.pyenv"
 
 if [ -d "$PYENV_ROOT" ]; then
-    # otherwise, let's assume pyenv isn't installed
     command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
-else
-    echo "$PYENV_ROOT does not exist"
 fi
 
 command -v direnv > /dev/null && eval "$(direnv hook zsh)"
@@ -144,5 +121,7 @@ fi
 
 test -e "${HOME}/.asdf/asdf.sh" && source "$HOME/.asdf/asdf.sh" || true
 
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
+if [ -d "$HOME/.volta" ]; then
+    export VOLTA_HOME="$HOME/.volta"
+    export PATH="$VOLTA_HOME/bin:$PATH"
+fi

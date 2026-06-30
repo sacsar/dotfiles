@@ -7,7 +7,7 @@ FISH := true
 ZSH := false
 
 default:
-	@echo "Run one of the following: mac, mariner, ubuntu, suse"
+	@echo "Run one of the following: darwin, mariner, ubuntu, suse, manjaro"
 
 # in order to facilitate the use of this repo as a submodule, include relative to the current makefile
 CURRENT_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
@@ -20,7 +20,7 @@ setup: xdg_dirs
 	@git submodule update --init --recursive
 	@$(CURRENT_DIR)scripts/gitconfig.sh
 
-mac: | mac_deps stow setup
+darwin: | darwin_deps stow setup
 	curl https://raw.githubusercontent.com/arcticicestudio/nord-iterm2/develop/src/xml/Nord.itermcolors -o $(HOME)/Nord.itermcolors
 
 mariner: | setup mariner_deps stow
@@ -37,13 +37,10 @@ mariner_fzf:
 
 # it's a little silly to include i3 and picom in os x
 stow: setup stow_install
-	stow -S -v --dotfiles nvim i3 picom zsh latexmk fish wezterm zellij
+	stow -S -v --dotfiles nvim i3 picom zsh latexmk fish wezterm zellij tmux starship
 
 dircolors:
 	curl https://raw.githubusercontent.com/arcticicestudio/nord-dircolors/develop/src/dir_colors -o $(HOME)/.dircolors
-
-linux_rg: setup
-	scripts/linux_ripgrep.sh
 
 $(XDG_DATA_HOME)/konsole:
 	@mkdir -p $(XDG_DATA_HOME)/konsole

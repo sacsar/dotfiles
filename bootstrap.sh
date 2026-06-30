@@ -13,6 +13,7 @@ determine_variant() {
   UNAME=$(uname)
   if [[ "$UNAME" == "Darwin" ]]; then
     echo "darwin"
+    return
   fi
   # otherwise we need to go look at /etc/os-release
   DISTRO=$(sed -n -E 's/^ID=(.+)$/\1/p' </etc/os-release)
@@ -25,6 +26,7 @@ determine_variant() {
   *mariner*) echo "mariner" ;;
   *suse*) echo "suse" ;;
   *manjaro*) echo "manjaro" ;;
+  *ubuntu* | *debian*) echo "ubuntu" ;;
   esac
 
   # Put nocasematch back
@@ -34,7 +36,10 @@ determine_variant() {
 install() {
   if [[ $VARIANT != "darwin" ]]; then
     echo "Installing $1. Expect to be prompted for sudo."
-    sudo $"install_$VARIANT" "$1"
+    local cmd="install_${VARIANT}"
+    # we want word-splitting here
+    # shellcheck disable=SC2086
+    sudo ${!cmd} "$1"
   else
     brew install "$1"
   fi
@@ -44,6 +49,12 @@ install() {
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
   VARIANT=$(determine_variant)
 
+  if [[ -z "$VARIANT" ]]; then
+    echo "Unsupported OS: could not determine variant from /etc/os-release" >&2
+    cat /etc/os-release >&2
+    exit 1
+  fi
+
   if ! command -v make &>/dev/null; then
     echo "make not found on the path. Attempting to install."
     install make
@@ -51,10 +62,10 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
 
   if ! command -v stow &>/dev/null; then
     if [[ "$VARIANT" != "mariner" ]]; then
-        install stow
-      else 
-        make stow_install
-      fi
+      install stow
+    else
+      make stow_install
+    fi
   fi
 
   make "$VARIANT"

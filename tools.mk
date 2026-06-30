@@ -2,7 +2,7 @@
 
 # I don't like this pattern of variables, but it does stop us from installing
 # both "manually" and via the package manager
-LINUX_NVIM_DEST ?= /opt/nvim-linux64/bin/nvim
+LINUX_NVIM_DEST ?= /opt/nvim-linux-x86_64/bin/nvim
 TMP_NVIM = $(shell command -v nvim)
 NEOVIM = $(if $(TMP_NVIM),$(TMP_NVIM),$(LINUX_NVIM_DEST))
 NEOVIM_PREREQ := $(if $(TMP_NVIM),,/tmp/nvim-linux64.tar.gz)
@@ -28,7 +28,7 @@ COMMON_PACKAGES = jq tree fish wget pandoc ripgrep fzf tmux xsel ncdu
 suse_PACKAGES = $(filter-out pandoc,$(COMMON_PACKAGES)) pandoc-cli
 ubuntu_PACKAGES = $(COMMON_PACKAGES)
 manjaro_PACKAGES = $(COMMON_PACKAGES)
-mariner_packages = $(filter-out ripgrep fzf neovim pandoc xsel,$(COMMON_PACKAGES)) awk tar
+mariner_PACKAGES = $(filter-out ripgrep fzf neovim pandoc xsel,$(COMMON_PACKAGES)) awk tar
 darwin_PACKAGES = $(filter-out wget tmux xsel tree,$(COMMON_PACKAGES)) coreutils
 
 %_deps: $(STARSHIP)
@@ -53,6 +53,14 @@ $(STARSHIP): | $(STARSHIP_PREREQ)
 	curl -sS -o $@ $(STARSHIP_INSTALL_URL)
 
 $(RIPGREP): /tmp/rg.tar.gz
+	mkdir -p $(XDG_BIN_HOME)
+	tar xzf $< --wildcards '*/rg' --strip-components=1 -C $(XDG_BIN_HOME)
+	mkdir -p $(XDG_BIN_HOME)/zsh
+	tar xzf $< --wildcards '*/complete/_rg' --strip-components=2 -C $(XDG_BIN_HOME)/zsh
+	mkdir -p $(XDG_CONFIG_HOME)/fish/completions
+	tar xzf $< --wildcards '*/complete/rg.fish' --strip-components=2 -C $(XDG_CONFIG_HOME)/fish/completions
+	mkdir -p $(XDG_CONFIG_HOME)/bash_completion
+	tar xzf $< --wildcards '*/complete/rg.bash' --strip-components=2 -C $(XDG_CONFIG_HOME)/bash_completion
 
 /tmp/rg.tar.gz: RG_URL = $(shell scripts/ripgrep_linux.sh)
 /tmp/rg.tar.gz:
