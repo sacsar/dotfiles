@@ -6,3 +6,6 @@ disabled = false
 [time]
 disabled = false
 format = '🕙[\[ $time \]]($style) '
+
+# [custom.jj]
+# starship-jj is configured in starship-jj.toml

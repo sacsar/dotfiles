@@ -44,8 +44,16 @@ make <variant>  # e.g., make suse
 
 ## Notes
 
+### Wezterm
+
 To add the wezterm-nightly repo to zypper on OpenSUSE (and bump priority above the default):
 ```bash
 sudo zypper ar https://copr.fedorainfracloud.org/coprs/wezfurlong/wezterm-nightly/repo/opensuse-tumbleweed/wezfurlong-wezterm-nightly-opensuse-tumbleweed.repo
 sudo zypper mr -p 10 copr:copr.fedorainfracloud.org:wezfurlong:wezterm-nightly
 ```
+
+### Starship
+
+Right now, I'm disabling the git modules in the starship prompt when `jj` is
+used by swapping an environmnet variable with a `fish` hook. On is a
+`starship_precmd_user_func` for bash that could do the swap.

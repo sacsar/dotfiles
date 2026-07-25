@@ -1,0 +1,35 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+[kubernetes]
+disabled = false
+
+[time]
+disabled = false
+format = '🕙[\[ $time \]]($style) '
+
+[custom.jj]
+command = "prompt"
+format = "$output"
+ignore_timeout = true
+shell = ["starship-jj", "--ignore-working-copy", "starship"]
+use_stdin = false
+when = true
+
+# Colocated jj repos still have a .git directory, so starship's built-in git
+# modules would render alongside custom.jj and duplicate/conflict with it.
+# This config is only swapped in via STARSHIP_CONFIG when a .jj dir is found
+# (see fish/dot-config/fish/conf.d/starship_jj.fish).
+[git_branch]
+disabled = true
+
+[git_commit]
+disabled = true
+
+[git_state]
+disabled = true
+
+[git_status]
+disabled = true
+
+[git_metrics]
+disabled = true
