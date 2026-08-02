@@ -5,7 +5,7 @@ local log = require("core.nvim.log")
 local ctx = require("core.nvim.context")
 local util = require("core.nvim.util")
 
----@alias MasonTool {[1]: string, [2]: boolean}
+---@alias MasonTool {name: string, install: boolean}
 
 ---@class Tool
 ---@field name string
@@ -39,7 +39,7 @@ M.tools = {
   c = { lsp = "clangd" },
   cpp = { lsp = "clangd" },
   rust = { lsp = "rust_analyzer" },
-  proto = { lsp = "buf-lsp", install = false },
+  proto = { lsp = { { name = "buf-lsp", install = false } } },
   typescript = { lsp = "ts_ls", formatters = "prettierd" },
   typescriptreact = { lsp = { { name = "ts_ls" }, { name = "tailwindcss" } }, formatters = "prettierd" },
 }
@@ -52,20 +52,13 @@ end
 --- Convert a Formatter or Lsp to a MasonTool
 ---@param x string|Tool|nil
 ---@return MasonTool?
-local function build_mason_tool(x)
+function M.build_mason_tool(x)
   if x == nil then
     return nil
   elseif type(x) == "string" then
-    return { x, true }
+    return { name = x, install = true }
   elseif type(x) == "table" then
-    -- if it's not a table, we have a real problem
-    local tools = {}
-    for _, item in ipairs(x) do
-      if item.install == nil or item.install then
-        tools.insert({ x.name, true })
-      end
-    end
-    return tools
+    return { name = x.name, install = x.install == nil or x.install }
   end
 end
 
@@ -75,12 +68,12 @@ M.ensure_installed = {}
 local mason_tools = util.Set:new()
 
 for _, val in pairs(M.tools) do
-  for _, f in ipairs(util.map(val.formatters, build_mason_tool) or {}) do
+  for _, f in ipairs(util.map(val.formatters, M.build_mason_tool) or {}) do
     if f.install then
       mason_tools:add(f.name)
     end
   end
-  local mason_lsp = util.map(val.lsp, build_mason_tool)
+  local mason_lsp = util.map(val.lsp, M.build_mason_tool)
   for _, l in ipairs(mason_lsp or {}) do
     if l.install then
       mason_tools:add(l.name)

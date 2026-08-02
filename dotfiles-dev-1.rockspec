@@ -21,7 +21,6 @@ test_dependencies = {
 build = {
 	type = "builtin",
 	modules = {
-		["core.nvim"] = "src/lua/core/nvim/init.lua",
 		["core.nvim.context"] = "src/lua/core/nvim/context.lua",
 		["core.nvim.folds"] = "src/lua/core/nvim/folds.lua",
 		["core.nvim.log"] = "src/lua/core/nvim/log.lua",

@@ -1,5 +1,16 @@
 local M = {}
 
+function M.isarray(t)
+  local count = 0
+  for k, _ in pairs(t) do
+    count = count + 1
+    if type(k) ~= "number" or k < 1 or k ~= math.floor(k) then
+      return false
+    end
+  end
+  return count == #t
+end
+
 function M.map(t, f)
   if t == nil then
     return nil
