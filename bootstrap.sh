@@ -9,28 +9,21 @@ install_suse="zypper in -y"
 install_manjaro="pacman -Sy"
 install_ubuntu="apt-get install -y"
 
-determine_variant() {
-  UNAME=$(uname)
-  if [[ "$UNAME" == "Darwin" ]]; then
-    echo "darwin"
-    return
-  fi
-  # otherwise we need to go look at /etc/os-release
-  DISTRO=$(sed -n -E 's/^ID=(.+)$/\1/p' </etc/os-release)
-  SHELLNOCASEMATCH=$(
-    shopt -p nocasematch
-    true
-  )
-  shopt -s nocasematch
-  case "$DISTRO" in
-  *mariner*) echo "mariner" ;;
-  *suse*) echo "suse" ;;
-  *manjaro*) echo "manjaro" ;;
-  *ubuntu* | *debian*) echo "ubuntu" ;;
-  esac
+# shellcheck source=scripts/detect_os.sh disable=SC1091
+source "$(dirname "${BASH_SOURCE[0]}")/scripts/detect_os.sh"
 
-  # Put nocasematch back
-  $SHELLNOCASEMATCH
+determine_variant() {
+  # detect_os() returns a raw OS identity; map it to the install_* variant
+  # names this script actually knows how to act on. An OS detect_os()
+  # recognizes but we don't (there is none today) or doesn't recognize at
+  # all maps to nothing, which the caller treats as a fatal error.
+  case "$(detect_os)" in
+  darwin) echo "darwin" ;;
+  opensuse) echo "suse" ;;
+  mariner) echo "mariner" ;;
+  manjaro) echo "manjaro" ;;
+  ubuntu) echo "ubuntu" ;;
+  esac
 }
 
 install() {
