@@ -45,3 +45,7 @@ switch (uname)
     case '*'
         fish_add_path "$HOME/.local/share/cs/bin"
 end
+
+# >>> coursier install directory >>>
+set -gx PATH "$PATH:/home/sebastian/.local/share/coursier/bin"
+# <<< coursier install directory <<<

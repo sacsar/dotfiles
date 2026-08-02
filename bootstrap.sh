@@ -45,6 +45,23 @@ install() {
   fi
 }
 
+mise() {
+  if command -v mise &>/dev/null; then
+    echo "mise is already installed ($(mise --version))."
+    return
+  fi
+  local script
+  script=$(curl -fsSL https://mise.run)
+  echo "$script" | "${PAGER:-less}"
+  read -r -p "Run the above script? [y/N] " answer
+  if [[ "$answer" =~ ^[Yy]$ ]]; then
+    bash <(echo "$script")
+  else
+    echo "Aborted." >&2
+    exit 1
+  fi
+}
+
 # Only execute main logic if script is run directly, not when sourced
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
   VARIANT=$(determine_variant)
@@ -58,6 +75,14 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
   if ! command -v make &>/dev/null; then
     echo "make not found on the path. Attempting to install."
     install make
+  fi
+
+  if [[ "$1" == "--mise" ]]; then
+    mise
+    MISE_BIN=$(command -v mise 2>/dev/null || echo "$HOME/.local/bin/mise")
+    "$MISE_BIN" install
+    make setup stow
+    exit 0
   fi
 
   if ! command -v stow &>/dev/null; then

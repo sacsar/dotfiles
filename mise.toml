@@ -1,0 +1,30 @@
+[bootstrap.packages]
+"dnf:tree" = "latest"
+"dnf:fish" = "latest"
+"dnf:wget" = "latest"
+"dnf:tmux" = "latest"
+"dnf:ncdu" = "latest"
+
+
+[tools]
+neovim = "latest"
+starship = "latest"
+ripgrep = "latest"
+fzf = "latest"
+jq = "latest"
+pandoc = "latest"
+
+# System packages not manageable via mise — install via OS package manager:
+#   tree, fish, wget, tmux, xsel, ncdu
+#
+# Equivalent commands per distro (mirrors tools.mk logic):
+#   openSUSE:  sudo zypper in -y tree fish wget tmux xsel ncdu
+#   Mariner:   sudo dnf install -y tree fish wget tmux xsel ncdu
+#   Ubuntu:    sudo apt-get install -y tree fish wget tmux xsel ncdu
+#   Manjaro:   sudo pacman -Sy tree fish wget tmux xsel ncdu
+#   macOS:     brew install fish tmux tree coreutils ncdu
+
+# mise.toml
+[settings]
+minimum_release_age = "7d"
+not_found_auto_install = false
