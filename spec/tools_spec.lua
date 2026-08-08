@@ -2,7 +2,7 @@ local util = require("core.nvim.util")
 -- tools.lua's log.lua dependency reaches for logging.console when `vim` is
 -- absent, which isn't installed outside a running Neovim. Stub just enough
 -- of `vim` so requiring the module doesn't need it.
-_G.vim = { log = { levels = { TRACE = 0, DEBUG = 1, INFO = 2, WARN = 3, ERROR = 4 } } }
+_G.vim = require("spec.vim_stub")
 
 local tools = require("core.nvim.tools")
 

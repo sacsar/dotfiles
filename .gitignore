@@ -10,3 +10,4 @@ tmux/dot-config/tmux/plugins
 /lua
 .task
 fish/dot-config/fish/fish_variables
+fish/dot-config/fish/completions/*

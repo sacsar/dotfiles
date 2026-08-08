@@ -48,5 +48,23 @@ else
   end, { desc = "Show LSP status (via checkhealth)" })
 end
 
+-- LSP keymaps not covered by nvim 0.11+ built-in defaults.
+-- Built-ins already provide: K, grr (refs), gri (impl), grn (rename),
+-- gra (code action), gO (doc symbol), i_<C-s> (signature help).
+M.attach_keymaps = {
+  { mode = "n", lhs = "gd", rhs = vim.lsp.buf.definition, desc = "Go to definition" },
+  { mode = "n", lhs = "gD", rhs = vim.lsp.buf.type_definition, desc = "Go to type definition" },
+  { mode = "n", lhs = "gws", rhs = vim.lsp.buf.workspace_symbol, desc = "Workspace symbols" },
+  { mode = "n", lhs = "<leader>cL", rhs = vim.lsp.codelens.run, desc = "Run code lens" },
+}
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    for _, entry in ipairs(M.attach_keymaps) do
+      vim.keymap.set(entry.mode, entry.lhs, entry.rhs, { buffer = args.buf, desc = entry.desc })
+    end
+  end,
+})
+
 M.attach_organize_imports = attach_organize_imports
 return M
