@@ -1,0 +1,13 @@
+profile laptop-only {
+    output "Lenovo Group Limited 0x40A9 Unknown" enable
+}
+
+profile docked {
+    output "Lenovo Group Limited 0x40A9 Unknown" position 0,0
+    output "Samsung Electric Company LS27A600U HCJRB01883" position 1920,0
+}
+
+profile external-only {
+    output "Lenovo Group Limited 0x40A9 Unknown" disable
+    output "Samsung Electric Company LS27A600U HCJRB01883" position 0,0
+}

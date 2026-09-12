@@ -1,0 +1,11 @@
+[Unit]
+Description=Kanshi output autoconfig
+After=sway-session.target
+PartOf=sway-session.target
+
+[Service]
+ExecStart=/usr/bin/kanshi
+Restart=on-failure
+
+[Install]
+WantedBy=sway-session.target
