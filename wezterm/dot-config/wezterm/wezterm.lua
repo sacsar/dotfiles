@@ -3,6 +3,8 @@ local wezterm = require("wezterm")
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
+local is_macos = wezterm.target_triple:find("darwin") ~= nil
+local has_external_monitor = false
 
 -- This is where you actually apply your config choices
 
@@ -18,6 +20,11 @@ if os.getenv("SWAYSOCK") then
     inactive_titlebar_bg = "none",
     active_titlebar_bg = "none",
   }
+end
+
+-- this was to stop flickering on my external monitor at work
+if is_macos then
+  config.front_end = "Software"
 end
 
 -- and finally, return the configuration to wezterm
