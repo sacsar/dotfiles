@@ -5,6 +5,7 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     opts = {
       ensure_installed = tools.ensure_installed,
+      debounce_hours = 7 * 24,
     },
   },
   {
